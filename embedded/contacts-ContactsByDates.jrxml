@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="contact_report" pageWidth="930" pageHeight="700" orientation="Landscape" columnWidth="890" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" formatFactoryClass="com.shoptick.bizops.reports.JasperFormatFactory" uuid="b56a5fa4-692e-42ef-aace-6edbd8d425f2">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<style name="row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#CCCCCC"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="range_start" class="java.util.Date"/>
+	<parameter name="range_end" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[select distinct
+contact.ID as contactID,
+contact.FIRST_NAME as first_name,
+contact.LAST_NAME  as last_name,
+contact.MIDDLE_NAME as middle_name,
+contact.COMPANY as company,
+resource.CREATED_BY_DATE,
+phone.DIAL_NUMBER as phone_number,
+address.LINE1 as address_one,
+address.LINE2 as address_two,
+address.LINE3 as address_three,
+address.CITY as address_city,
+address.STATE_OR_PROVINCE as address_state,
+address.POSTAL_CODE as address_zip,
+address.COUNTRY as address_country,
+inetemail.ADDRESS_URL as email_id,
+(select company_name from st_biz_corp_identity where is_hq = 1) as company_name,
+
+(select GROUP_CONCAT(type.RESOURCE_NAME SEPARATOR ', ') from st_biz_rc_resource_types AS types LEFT JOIN st_biz_resource_type AS type ON type.id = types.resource_type_id where types.resource_id = resource.id order by type.RESOURCE_NAME) AS contact_type,
+
+CASE WHEN ((contact.MIDDLE_NAME is null) AND ((contact.FIRST_NAME is not null) AND (contact.LAST_NAME is not null))) then concat(contact.FIRST_NAME,'  ',contact.LAST_NAME)
+WHEN ((contact.LAST_NAME is null) AND ((contact.FIRST_NAME is not null) AND (contact.MIDDLE_NAME is not null))) then concat(contact.FIRST_NAME,'  ',contact.MIDDLE_NAME)
+WHEN ((contact.FIRST_NAME is  null) AND ((contact.MIDDLE_NAME is not null) AND (contact.LAST_NAME is not null))) then concat(contact.MIDDLE_NAME,'  ',contact.LAST_NAME)
+WHEN ((contact.MIDDLE_NAME is not null) AND (contact.FIRST_NAME is not null) AND (contact.LAST_NAME is not null)) then concat(contact.FIRST_NAME,' ',contact.MIDDLE_NAME,' ',contact.LAST_NAME)
+ELSE null
+END CONTACT_NAME,
+
+CASE WHEN (address.LINE1 is not null)  then address.LINE1
+ELSE null
+END ADDRESS_LINE1,
+
+CASE WHEN ((address.LINE3 is null) AND (address.LINE2 is not null)) then address.LINE2
+WHEN ((address.LINE3 is not null) AND (address.LINE2 is not null)) then concat(address.LINE2,'   ', address.LINE3)
+WHEN ((address.LINE3 is not null) AND (address.LINE2 is null)) then address.LINE3
+ELSE null
+END ADDRESS_LINE2,
+
+CASE WHEN ((address.STATE_OR_PROVINCE is null) AND ((address.CITY is not null) AND (address.POSTAL_CODE is not null) )) then concat(address.CITY,' ,  ',address.POSTAL_CODE)
+WHEN ((address.CITY is null) AND ((address.STATE_OR_PROVINCE is not null) AND (address.POSTAL_CODE is not null) )) then concat(address.STATE_OR_PROVINCE,'   ',address.POSTAL_CODE)
+WHEN ((address.POSTAL_CODE is null) AND ((address.CITY is not null) AND (address.STATE_OR_PROVINCE is not null) )) then concat(address.CITY,' ,  ',address.STATE_OR_PROVINCE)
+WHEN ((address.POSTAL_CODE is not null) AND (address.CITY is not null) AND (address.STATE_OR_PROVINCE is not null)) then concat(address.CITY,' ,  ',address.STATE_OR_PROVINCE, '   ',address.POSTAL_CODE)
+WHEN ((address.POSTAL_CODE is null) AND (address.CITY is null) AND (address.STATE_OR_PROVINCE is null)) then null
+ELSE null
+END ADDRESS_LINE3,
+
+CASE WHEN (contact.ID is not null)  then 1
+ELSE null
+END RANDOM
+
+from st_crm_contact as contact
+
+LEFT JOIN st_crm_address as address
+ON contact.DEF_MAIL_ID = address.ID
+
+LEFT JOIN st_crm_phone as phone
+ON contact.DEF_PHONE_ID = phone.ID
+
+LEFT JOIN st_crm_inet_addr as inetadd
+ON inetadd.CONTACT_ID = contact.ID
+
+LEFT JOIN st_crm_inet_addr as inetemail
+ON contact.DEF_EMAIL_ID = inetemail.ID
+
+LEFT JOIN st_biz_managed_resource as resource
+ON resource.ID = contact.ID
+
+WHERE resource.IS_DELETED = false
+AND (CASE
+when ($P{range_start} IS NOT NULL AND $P{range_end} IS NOT NULL) then
+  	(CAST(resource.created_by_date AS DATE) >= $P{range_start} AND CAST(resource.created_by_date AS DATE) <= $P{range_end})
+when ($P{range_start} IS NOT NULL) then
+	(CAST(resource.created_by_date AS DATE) >= $P{range_start})
+when ($P{range_end} IS NOT NULL) then
+	(CAST(resource.created_by_date AS DATE) <= $P{range_end})
+else
+	1 = 1
+END )
+order by resource.CREATED_BY_DATE]]>
+	</queryString>
+	<field name="contactID" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="first_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="last_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="middle_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="company_name" class="java.lang.String"/>
+	<field name="company" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="phone_number" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="address_one" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="address_two" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="address_three" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="address_city" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="address_state" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="address_zip" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="address_country" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="email_id" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CREATED_BY_DATE" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="contact_type" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CONTACT_NAME" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ADDRESS_LINE1" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="RANDOM" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ADDRESS_LINE2" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ADDRESS_LINE3" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="num_rows" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{contactID}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="random_number" class="java.lang.Long" incrementType="Group" incrementGroup="contact_group" calculation="Sum">
+		<variableExpression><![CDATA[$F{RANDOM}]]></variableExpression>
+	</variable>
+	<group name="contact_group">
+		<groupExpression><![CDATA[$F{contactID}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="58" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="90e4d551-3eed-49a0-af9b-dcb75082a2d8" x="656" y="0" width="234" height="25"/>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="18" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Contacts By Dates]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="cced3342-1da0-462f-b032-09ef9db63d80" x="0" y="0" width="257" height="25"/>
+				<textElement>
+					<font fontName="Calibri" size="18" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{company_name}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement uuid="80702303-0a19-4351-b19c-addf64a437c4" positionType="Float" x="656" y="25" width="234" height="15" isRemoveLineWhenBlank="true"/>
+				<textField>
+					<reportElement uuid="64fcc81b-4eca-4b11-a500-4bad0ca8bd1e" x="0" y="0" width="119" height="15" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{range_start} != null ||
+$P{range_end} != null]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Top" markup="none">
+						<font fontName="Calibri" size="11" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Date Range:"]]></textFieldExpression>
+				</textField>
+				<textField pattern="SHORT_DATE" isBlankWhenNull="true">
+					<reportElement uuid="64fcc81b-4eca-4b11-a500-4bad0ca8bd1e" x="119" y="0" width="55" height="15" isRemoveLineWhenBlank="true"/>
+					<box leftPadding="0" rightPadding="0"/>
+					<textElement textAlignment="Right" verticalAlignment="Top" markup="none">
+						<font fontName="Calibri" size="11" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{range_start}]]></textFieldExpression>
+				</textField>
+				<textField pattern="SHORT_DATE" isBlankWhenNull="true">
+					<reportElement uuid="64fcc81b-4eca-4b11-a500-4bad0ca8bd1e" x="173" y="0" width="10" height="15" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$P{range_start} != null ||
+$P{range_end} != null]]></printWhenExpression>
+					</reportElement>
+					<box leftPadding="3" rightPadding="3"/>
+					<textElement textAlignment="Right" verticalAlignment="Top" markup="none">
+						<font fontName="Calibri" size="11" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["-"]]></textFieldExpression>
+				</textField>
+				<textField pattern="SHORT_DATE" isBlankWhenNull="true">
+					<reportElement uuid="64fcc81b-4eca-4b11-a500-4bad0ca8bd1e" x="179" y="0" width="55" height="15" isRemoveLineWhenBlank="true"/>
+					<box leftPadding="0" rightPadding="0"/>
+					<textElement textAlignment="Right" verticalAlignment="Top" markup="none">
+						<font fontName="Calibri" size="11" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{range_end}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="16" splitType="Stretch">
+			<textField>
+				<reportElement uuid="cb71c4c0-f1e2-4fe3-929a-9fb41228d772" x="0" y="0" width="60" height="15"/>
+				<box leftPadding="3" rightPadding="3">
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Number"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6cea6c4e-caa0-46c9-8e1d-e960b3812513" x="60" y="0" width="126" height="15"/>
+				<box leftPadding="3" rightPadding="3">
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Contact Name"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2ef3e323-6c8c-40ab-b086-b2137a4f3d72" x="280" y="0" width="94" height="15"/>
+				<box leftPadding="3" rightPadding="3">
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Contact Type"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6394d7a5-0b1d-4f75-b0ab-ffe7d72d95aa" x="374" y="0" width="136" height="15"/>
+				<box leftPadding="3" rightPadding="3">
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Company"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f68188f6-93f7-4f93-be88-ff1c4b017772" x="510" y="0" width="146" height="15"/>
+				<box leftPadding="3" rightPadding="3">
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Address"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="aaf6d1c2-900a-427d-8f94-52c22ea7fcf9" x="656" y="0" width="87" height="15"/>
+				<box leftPadding="3" rightPadding="3">
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Phone Number"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="48c5755c-fa1d-4710-80aa-18de33962d69" x="743" y="0" width="147" height="15"/>
+				<box leftPadding="3" rightPadding="3">
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Email ID"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="31c88e07-25df-49d1-8984-e0d980cf7006" x="186" y="0" width="94" height="15"/>
+				<box leftPadding="3" rightPadding="3">
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Calibri" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Created Date"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="98b19a5a-e98f-4b40-b181-54b29090c477" style="row" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="60" height="16" isPrintWhenDetailOverflows="true"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{random_number}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="cf43cd8e-e322-40aa-83cb-1f0068f843e2" style="row" stretchType="RelativeToTallestObject" mode="Opaque" x="60" y="0" width="126" height="16" isPrintWhenDetailOverflows="true"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CONTACT_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="TIME_STAMP" isBlankWhenNull="true">
+				<reportElement uuid="35d614dc-1858-4b73-84bf-35e8571badda" style="row" stretchType="RelativeToTallestObject" mode="Opaque" x="186" y="0" width="94" height="16" isPrintWhenDetailOverflows="true"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CREATED_BY_DATE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="f231810d-7832-4f00-a7fd-120e9f17fffc" style="row" stretchType="RelativeToTallestObject" mode="Opaque" x="280" y="0" width="94" height="16" isPrintWhenDetailOverflows="true"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contact_type}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="4a7ad340-9a0d-44c9-8fd0-e22266dcef80" style="row" stretchType="RelativeToTallestObject" mode="Opaque" x="374" y="0" width="136" height="16" isPrintWhenDetailOverflows="true"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{company}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="1cc96567-76c6-4e50-9ee5-ad029241a910" style="row" stretchType="RelativeToTallestObject" mode="Opaque" x="510" y="0" width="146" height="16" isPrintWhenDetailOverflows="true"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{ADDRESS_LINE1} != null? $F{ADDRESS_LINE1} + "\n":"")+
+($F{ADDRESS_LINE2} != null? $F{ADDRESS_LINE2} + "\n":"")+
+($F{ADDRESS_LINE3} != null? $F{ADDRESS_LINE3}:"")]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="0ed230ca-bb6e-400d-84ef-a1660114a7a1" style="row" stretchType="RelativeToTallestObject" mode="Opaque" x="743" y="0" width="147" height="16" isPrintWhenDetailOverflows="true"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{email_id}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="617b2b5f-0c47-4db8-91ce-c9200f52dcb4" style="row" stretchType="RelativeToTallestObject" mode="Opaque" x="656" y="0" width="87" height="16" isPrintWhenDetailOverflows="true"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+				<textElement textAlignment="Left">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{phone_number}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="22" splitType="Stretch">
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement uuid="e2afb985-de98-46df-9e77-95fd294dcdfe" stretchType="RelativeToTallestObject" x="726" y="0" width="104" height="15"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Generated"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="a74c7943-6aa7-4960-9c41-7d0bc2e34af2" x="412" y="0" width="121" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="TIME_STAMP" isBlankWhenNull="true">
+				<reportElement uuid="e2afb985-de98-46df-9e77-95fd294dcdfe" stretchType="RelativeToTallestObject" x="824" y="0" width="71" height="15"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c279c11e-c5fa-46de-995a-382686324fc7" x="334" y="0" width="78" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

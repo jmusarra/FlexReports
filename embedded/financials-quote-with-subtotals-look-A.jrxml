@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="simplified-quote" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="subtotal_style" fontSize="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<conditionalStyle>
+			<conditionExpression><![CDATA["true".equals($F{bold})]]></conditionExpression>
+			<style markup="styled" fontSize="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="subtotals">
+		<queryString language="xpath2">
+			<![CDATA[/report/subTotalRecord]]>
+		</queryString>
+		<field name="subTotalCaption" class="java.lang.String">
+			<fieldDescription><![CDATA[subTotalCaption]]></fieldDescription>
+		</field>
+		<field name="subTotalAmount" class="java.lang.String">
+			<fieldDescription><![CDATA[subTotalAmount]]></fieldDescription>
+		</field>
+		<field name="bold" class="java.lang.String">
+			<fieldDescription><![CDATA[bold]]></fieldDescription>
+		</field>
+	</subDataset>
+	<parameter name="XML_PRODUCER_BEAN_ID" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["data-producer-financial-document"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="PROJECT_ELEMENT_ID" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="DOCUMENT_VIEW_ID" class="java.lang.String" isForPrompting="false"/>
+	<queryString language="xpath2">
+		<![CDATA[/report/record]]>
+	</queryString>
+	<field name="elementName" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/elementName]]></fieldDescription>
+	</field>
+	<field name="elementNameCaption" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/elementNameCaption]]></fieldDescription>
+	</field>
+	<field name="elementDefinitionName" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/elementDefinitionName]]></fieldDescription>
+	</field>
+	<field name="lineItemGroup" class="java.lang.String">
+		<fieldDescription><![CDATA[lineItemGroup]]></fieldDescription>
+	</field>
+	<field name="lineItemGroupFooter" class="java.lang.String">
+		<fieldDescription><![CDATA[lineItemGroupFooter]]></fieldDescription>
+	</field>
+	<field name="quantity" class="java.lang.String">
+		<fieldDescription><![CDATA[quantity]]></fieldDescription>
+	</field>
+	<field name="description" class="java.lang.String">
+		<fieldDescription><![CDATA[description]]></fieldDescription>
+	</field>
+	<field name="dateCreated" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/dateCreated]]></fieldDescription>
+	</field>
+	<field name="numberCaption" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/numberCaption]]></fieldDescription>
+	</field>
+	<field name="number" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/number]]></fieldDescription>
+	</field>
+	<field name="loadInDate" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/loadInDate]]></fieldDescription>
+	</field>
+	<field name="startDate" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/startDate]]></fieldDescription>
+	</field>
+	<field name="endDate" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/endDate]]></fieldDescription>
+	</field>
+	<field name="startDateCaption" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/startDateCaption]]></fieldDescription>
+	</field>
+	<field name="endDateCaption" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/endDateCaption]]></fieldDescription>
+	</field>
+	<field name="logoImage" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/logoImage]]></fieldDescription>
+	</field>
+	<field name="addressString" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/addressString]]></fieldDescription>
+	</field>
+	<field name="phoneNumber" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/phoneNumber]]></fieldDescription>
+	</field>
+	<field name="faxNumber" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/faxNumber]]></fieldDescription>
+	</field>
+	<field name="deposit" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/deposit]]></fieldDescription>
+	</field>
+	<field name="depositDueDate" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/depositDueDate]]></fieldDescription>
+	</field>
+	<field name="generateDate" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/generateDate]]></fieldDescription>
+	</field>
+	<field name="notes" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/notes]]></fieldDescription>
+	</field>
+	<field name="groupTotalBeforeDiscount" class="java.lang.String">
+		<fieldDescription><![CDATA[groupTotalBeforeDiscount]]></fieldDescription>
+	</field>
+	<field name="groupDiscount" class="java.lang.String">
+		<fieldDescription><![CDATA[groupDiscount]]></fieldDescription>
+	</field>
+	<field name="isGroupDiscount" class="java.lang.String">
+		<fieldDescription><![CDATA[isGroupDiscount]]></fieldDescription>
+	</field>
+	<field name="groupDiscountPct" class="java.lang.String">
+		<fieldDescription><![CDATA[groupDiscountPct]]></fieldDescription>
+	</field>
+	<field name="groupTotal" class="java.lang.String">
+		<fieldDescription><![CDATA[groupTotal]]></fieldDescription>
+	</field>
+	<group name="Line">
+		<groupExpression><![CDATA[$F{lineItemGroup}]]></groupExpression>
+		<groupHeader>
+			<band height="16">
+				<textField>
+					<reportElement x="0" y="0" width="368" height="16" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$F{lineItemGroup} != null && !"".equals($F{lineItemGroup})]]></printWhenExpression>
+					</reportElement>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{lineItemGroup}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="51">
+				<textField isBlankWhenNull="true">
+					<reportElement x="214" y="28" width="263" height="14" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$F{lineItemGroup} != null && !"".equals($F{lineItemGroup})
+&& $F{groupTotal} != null && !"".equals($F{groupTotal})]]></printWhenExpression>
+					</reportElement>
+					<box leftPadding="0" rightPadding="0">
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{lineItemGroupFooter} + ":"]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="214" y="0" width="263" height="14" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA["true".equals($F{isGroupDiscount})]]></printWhenExpression>
+					</reportElement>
+					<box leftPadding="0" rightPadding="0">
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Total Before Discount:"]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="214" y="14" width="263" height="14" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA["true".equals($F{isGroupDiscount})]]></printWhenExpression>
+					</reportElement>
+					<box leftPadding="0" rightPadding="0">
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{groupDiscountPct} + " Discount:"]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="494" y="0" width="78" height="14" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA["true".equals($F{isGroupDiscount})]]></printWhenExpression>
+					</reportElement>
+					<box rightPadding="2">
+						<leftPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{groupTotalBeforeDiscount}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="494" y="28" width="78" height="14" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[$F{lineItemGroup} != null && !"".equals($F{lineItemGroup})
+&& $F{groupTotal} != null && !"".equals($F{groupTotal})]]></printWhenExpression>
+					</reportElement>
+					<box rightPadding="2">
+						<leftPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{groupTotal}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="494" y="14" width="78" height="14" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA["true".equals($F{isGroupDiscount})]]></printWhenExpression>
+					</reportElement>
+					<box rightPadding="2">
+						<leftPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{groupDiscount}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="171" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="461" y="46" width="105" height="14"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{elementName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="349" y="46" width="100" height="14"/>
+				<box rightPadding="3"/>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{elementNameCaption} + ":"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="366" y="0" width="200" height="26"/>
+				<box rightPadding="20"/>
+				<textElement textAlignment="Right">
+					<font size="20"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{elementDefinitionName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="349" y="32" width="100" height="14"/>
+				<box rightPadding="3"/>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{numberCaption} + ":"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="461" y="32" width="105" height="14"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{number}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="461" y="60" width="105" height="14"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{dateCreated}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="349" y="60" width="100" height="14"/>
+				<box rightPadding="3"/>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date Created:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="461" y="87" width="105" height="14"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{loadInDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="349" y="87" width="100" height="14"/>
+				<box rightPadding="3"/>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Load In:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="349" y="101" width="100" height="14"/>
+				<box rightPadding="3"/>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{startDateCaption} + ":"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="349" y="115" width="100" height="14"/>
+				<box rightPadding="3"/>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{endDateCaption} + ":"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="461" y="101" width="105" height="14"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{startDate}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="461" y="115" width="105" height="14"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{endDate}]]></textFieldExpression>
+			</textField>
+			<image hAlign="Left" vAlign="Top" onErrorType="Icon">
+				<reportElement x="0" y="0" width="200" height="50"/>
+				<imageExpression class="java.net.URL"><![CDATA[$F{logoImage} != null ? new URL($F{logoImage}) : null]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="0" y="50" width="200" height="51"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{addressString} != null && !$F{addressString}.trim().equals("") ? $F{addressString} : "") +
+
+($F{phoneNumber} != null && !$F{phoneNumber}.trim().equals("") ? "Phone  " + $F{phoneNumber} + "\n" : "") +
+
+($F{faxNumber} != null && !$F{faxNumber}.trim().equals("") ? "Fax  " + $F{faxNumber} : "")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="349" y="129" width="100" height="14" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{deposit} != null && !"".equals($F{deposit}) && !"null".equals($F{deposit})]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="3"/>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Deposit:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="349" y="143" width="100" height="14" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[($F{deposit} != null && !"".equals($F{deposit}))]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="3"/>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Deposit Due Date:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement x="461" y="129" width="105" height="14" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{deposit} != null && !"".equals($F{deposit}) && !"null".equals($F{deposit})]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{deposit}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="461" y="143" width="105" height="14" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[($F{deposit} != null && !"".equals($F{deposit}))]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{depositDueDate} == null || "".equals($F{depositDueDate})) && ($F{deposit} != null && !"".equals($F{deposit})) ? "Upon signing" : $F{depositDueDate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="7" y="1" width="42" height="16"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qty]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="53" y="1" width="315" height="16"/>
+				<box leftPadding="3">
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Item Description]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="7" y="0" width="42" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{quantity}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="53" y="0" width="315" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="226" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="306" y="0" width="40" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="172" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{generateDate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="35" splitType="Prevent">
+			<componentElement>
+				<reportElement x="294" y="3" width="278" height="16"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="subtotals">
+						<datasetParameter name="XML_DATA_DOCUMENT">
+							<datasetParameterExpression><![CDATA[$P{XML_DATA_DOCUMENT}]]></datasetParameterExpression>
+						</datasetParameter>
+						<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JRXmlDataSource)
+$P{REPORT_DATA_SOURCE}).dataSource("/report/subTotalRecord")]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="16" width="278">
+						<textField>
+							<reportElement style="subtotal_style" x="0" y="0" width="183" height="16"/>
+							<textElement textAlignment="Right">
+								<font size="10" isBold="true"/>
+							</textElement>
+							<textFieldExpression class="java.lang.String"><![CDATA[$F{subTotalCaption} + ":"]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement style="subtotal_style" x="183" y="0" width="95" height="16"/>
+							<box rightPadding="2"/>
+							<textElement textAlignment="Right">
+								<font size="10"/>
+							</textElement>
+							<textFieldExpression class="java.lang.String"><![CDATA[$F{subTotalAmount}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="19" width="286" height="16">
+					<printWhenExpression><![CDATA[$F{notes} != null && !$F{notes}.equals("")]]></printWhenExpression>
+				</reportElement>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{notes}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="3" width="99" height="16">
+					<printWhenExpression><![CDATA[$F{notes} != null && !$F{notes}.equals("")]]></printWhenExpression>
+				</reportElement>
+				<textElement/>
+				<text><![CDATA[Notes:]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

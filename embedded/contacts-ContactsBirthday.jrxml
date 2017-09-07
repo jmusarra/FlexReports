@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ContactsBirthday" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" formatFactoryClass="com.shoptick.bizops.reports.JasperFormatFactory" uuid="09407003-8f48-4930-a286-aebe3df8b15b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#CCCCCC"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="dsCompanyName" uuid="a165a89f-be29-41ef-9cea-d509b1142f86">
+		<queryString>
+			<![CDATA[select COMPANY_NAME from st_biz_corp_identity where is_hq = true]]>
+		</queryString>
+		<field name="COMPANY_NAME" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="Days_To_BDay" class="java.lang.String">
+		<defaultValueExpression><![CDATA["30"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Days_To_BDay_Int" class="java.lang.Integer" isForPrompting="false">
+		<defaultValueExpression><![CDATA[Integer.valueOf($P{Days_To_BDay})]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from (
+select
+contact.first_name as first_name,
+contact.last_name as last_name,
+contact.company as comany,
+contact.birthday as birthday,
+inetemail.ADDRESS_URL as email_id,
+MAKEDATE(YEAR(NOW()),DAYOFYEAR(contact.birthday)) make_birthday,
+(case when datediff(MAKEDATE(YEAR(NOW()),DAYOFYEAR(contact.birthday)),current_date) < 0 then
+    datediff(MAKEDATE(YEAR(NOW()),DAYOFYEAR(contact.birthday)),current_date) + 365
+else
+    datediff(MAKEDATE(YEAR(NOW()),DAYOFYEAR(contact.birthday)),current_date)
+end) days_to_birthday
+from st_crm_contact contact
+LEFT JOIN st_crm_inet_addr as inetemail
+ON contact.DEF_EMAIL_ID = inetemail.ID
+LEFT JOIN st_biz_managed_resource as resource
+ON resource.ID = contact.ID
+where birthday is not null
+and resource.IS_DELETED = false
+) temp_t where
+days_to_birthday < $P!{Days_To_BDay_Int}
+order by days_to_birthday asc,first_name asc]]>
+	</queryString>
+	<field name="first_name" class="java.lang.String"/>
+	<field name="last_name" class="java.lang.String"/>
+	<field name="comany" class="java.lang.String"/>
+	<field name="birthday" class="java.sql.Timestamp"/>
+	<field name="email_id" class="java.lang.String"/>
+	<field name="make_birthday" class="java.sql.Date"/>
+	<field name="days_to_birthday" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="55" splitType="Stretch">
+			<componentElement>
+				<reportElement uuid="8a0dc8e6-7538-4bb4-b4ff-c642d5f25763" x="0" y="0" width="274" height="25"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="dsCompanyName" uuid="5ddbfa7b-b185-4bc3-bccb-f18640c1076a">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="25" width="274">
+						<textField>
+							<reportElement uuid="db845618-02cd-41e4-b2d0-37ef647470ff" x="0" y="0" width="274" height="25"/>
+							<textElement>
+								<font fontName="Calibri" size="18" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{COMPANY_NAME}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<textField>
+				<reportElement uuid="3a3973ba-fbc2-439d-8147-afb4d0768745" x="317" y="0" width="255" height="25"/>
+				<box leftPadding="3" rightPadding="3"/>
+				<textElement textAlignment="Right" markup="none">
+					<font fontName="Calibri" size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Contacts Birthday"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="64fcc81b-4eca-4b11-a500-4bad0ca8bd1e" positionType="Float" x="318" y="25" width="254" height="15" isRemoveLineWhenBlank="true"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" markup="none">
+					<font fontName="Calibri" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Days_To_BDay_Int}!= null ?
+("Days to Birthday: " +$P{Days_To_BDay_Int}) : ""]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="c766462c-b342-4684-a8ca-749d28ae9fb5" mode="Transparent" x="179" y="0" width="126" height="15" backcolor="#FFFFFF"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Company]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5a379b27-4f22-46f9-91f8-9bc49c1767aa" mode="Transparent" x="305" y="0" width="67" height="15" backcolor="#FFFFFF"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Birthday]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="724cd263-6f5a-4370-82fa-6e3768343310" mode="Transparent" x="0" y="0" width="89" height="15" backcolor="#FFFFFF"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<text><![CDATA[First Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a62f6986-f0fa-482c-a00c-3df396b1765c" mode="Transparent" x="89" y="0" width="90" height="15" backcolor="#FFFFFF"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Last Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="051c5938-e70a-4824-8198-41f28e0ea0ad" mode="Transparent" x="372" y="0" width="128" height="15" backcolor="#FFFFFF"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Email]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9d033d0d-2e86-4b0c-aeb7-102fe2258799" mode="Transparent" x="500" y="0" width="72" height="15" backcolor="#FFFFFF"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Days to B'Day]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="e549f4a4-96f4-4167-b1d2-f67259ea84d8" style="row" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="89" height="16"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="Calibri" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{first_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="8ba6548f-4d7c-4481-9807-9e19321d6c11" style="row" stretchType="RelativeToTallestObject" mode="Opaque" x="89" y="0" width="90" height="16"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="Calibri" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{last_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="8611cb47-4a28-4772-bff9-e1604bcf2146" style="row" stretchType="RelativeToTallestObject" mode="Opaque" x="179" y="0" width="126" height="16"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="Calibri" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{comany}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="SHORT_DATE" isBlankWhenNull="true">
+				<reportElement uuid="2b153927-276d-4e52-a33d-a935f287d925" style="row" stretchType="RelativeToTallestObject" mode="Opaque" x="305" y="0" width="67" height="16"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="Calibri" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{birthday}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="96e85ad5-ad85-462b-825e-2a99f8c6cccf" style="row" stretchType="RelativeToTallestObject" mode="Opaque" x="372" y="0" width="128" height="16"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="Calibri" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{email_id}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="999afffb-04b6-4464-9ad4-ce312bb4f584" style="row" stretchType="RelativeToTallestObject" mode="Opaque" x="500" y="0" width="72" height="16"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Calibri" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{days_to_birthday}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="21" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement uuid="a74c7943-6aa7-4960-9c41-7d0bc2e34af2" x="287" y="0" width="121" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement uuid="e2afb985-de98-46df-9e77-95fd294dcdfe" stretchType="RelativeToTallestObject" x="408" y="0" width="104" height="15"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Generated"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="TIME_STAMP" isBlankWhenNull="true">
+				<reportElement uuid="e2afb985-de98-46df-9e77-95fd294dcdfe" stretchType="RelativeToTallestObject" x="506" y="0" width="71" height="15"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c279c11e-c5fa-46de-995a-382686324fc7" x="209" y="0" width="78" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
