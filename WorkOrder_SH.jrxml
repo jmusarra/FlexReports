@@ -224,21 +224,21 @@
 				<imageExpression><![CDATA[$F{logoImage} != null ? new URL($F{logoImage}) : null]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="263" y="2" width="309" height="23" uuid="8bc72323-f4f9-4fde-823f-5ae1f6f35d6e"/>
-				<textElement textAlignment="Center">
+				<reportElement x="210" y="2" width="362" height="23" uuid="8bc72323-f4f9-4fde-823f-5ae1f6f35d6e"/>
+				<textElement textAlignment="Right">
 					<font size="18" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{elementName}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="316" y="27" width="236" height="15" uuid="8ee268e5-28a1-471c-8669-aa5b95d2b298"/>
+				<reportElement x="336" y="27" width="236" height="15" uuid="8ee268e5-28a1-471c-8669-aa5b95d2b298"/>
 				<textElement textAlignment="Center">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{numberCaption} + ": " + $F{number}]]></textFieldExpression>
 			</textField>
 			<componentElement>
-				<reportElement style="Barcode" x="317" y="45" width="236" height="28" uuid="2df4a1b5-90d1-4442-8ac6-3fe111ee7b36"/>
+				<reportElement style="Barcode" x="336" y="45" width="236" height="28" uuid="2df4a1b5-90d1-4442-8ac6-3fe111ee7b36"/>
 				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="true" checksumRequired="false" barWidth="2" barHeight="40">
 					<jr:codeExpression><![CDATA[$F{number}]]></jr:codeExpression>
 				</jr:barbecue>
