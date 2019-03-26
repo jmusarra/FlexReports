@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="InventoryCountSheet" pageWidth="612" pageHeight="792" whenNoDataType="NoDataSection" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="e4eed755-cd8f-4e9e-86b5-3d793aa28f9f">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="stagehouse.mysql"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="277"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="723"/>
+	<property name="com.jaspersoft.studio.report.description" value="Stage House - Inventory Count Sheet"/>
+	<parameter name="INVENTORY_GROUP" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="ITEM_ID" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+	g.full_display_string as groupString,
+    n.resource_name AS itemName,
+    item_size AS itemSize,
+	m.bar_code_id AS barCodeID,
+    sn.is_sold,
+    sn.stencil,
+    m.presumed_missing,
+    decommissioned_date,
+    mrr.mrr as dueBack,
+    IFNULL(mrr.element_name, "Las Vegas") as showName
+    
+	
+FROM st_biz_managed_resource as m
+	JOIN st_ivt_serial_number AS sn on sn.id = m.id
+	JOIN st_ivt_inventory_item AS i ON i.id = sn.item_id
+	JOIN st_ivt_inventory_group AS g ON g.ID = i.group_id
+	JOIN st_biz_managed_resource as n on n.id = i.id
+    LEFT JOIN ( SELECT MAX(return_date) as mrr, m.id, p.element_name
+		   FROM st_prj_project_element_line_item as l
+	       INNER JOIN st_biz_managed_resource AS m on l.managed_resource_id = m.id
+		   INNER JOIN st_prj_project_element as p on l.project_element_id = p.id
+		   WHERE l.return_date > NOW()
+           AND p.is_deleted = 0
+		   GROUP BY l.id ) mrr on mrr.id = m.id	
+
+
+WHERE 
+	 m.is_deleted = 0
+	 AND i.id = $P{ITEM_ID}
+
+     
+GROUP BY barCodeID
+ORDER BY dueBack, showName, barCodeID]]>
+	</queryString>
+	<field name="groupString" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="groupString"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="st_ivt_inventory_group"/>
+	</field>
+	<field name="itemName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="itemName"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="st_biz_managed_resource"/>
+	</field>
+	<field name="itemSize" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="itemSize"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="st_ivt_inventory_item"/>
+	</field>
+	<field name="barCodeID" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="barCodeID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="st_biz_managed_resource"/>
+	</field>
+	<field name="is_sold" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.label" value="is_sold"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="st_ivt_serial_number"/>
+	</field>
+	<field name="presumed_missing" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.label" value="presumed_missing"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="st_biz_managed_resource"/>
+	</field>
+	<field name="decommissioned_date" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="decommissioned_date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="st_ivt_serial_number"/>
+	</field>
+	<field name="dueBack" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="dueBack"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="st_prj_project_element_line_item"/>
+	</field>
+	<field name="showName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="showName"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="st_prj_project_element"/>
+	</field>
+	<field name="stencil" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="stencil"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="st_ivt_serial_number"/>
+	</field>
+	<variable name="expectedCount" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{showName}.equals("Las Vegas") ? 1 : 0]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="33" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="571" height="33" backcolor="#E2E2E2" uuid="d22a508b-a66e-4855-99bf-168b9c12b8ac"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="22"/>
+				</textElement>
+				<text><![CDATA[Inventory Count Sheet]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="5" y="1" width="174" height="30" uuid="9204e5e3-d75f-46ab-98aa-3b1fa8f8a42c"/>
+				<textElement>
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ITEM_ID}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="77" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="0" width="571" height="77" uuid="c4110271-c207-40b1-8412-347cb7c2538b"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="15" y="58" width="65" height="15" uuid="b6ccdbc6-3dc9-4d0b-97b8-648e862a0a96"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Calibri" size="12" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Item Name:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="80" y="58" width="220" height="15" uuid="d943303e-a521-4ee0-a35f-1d876762e8d9"/>
+				<box rightPadding="8">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Calibri" size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{itemName} + " - " + ($F{itemSize} !=null ? $F{itemSize} + " ": "                ")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="406" y="8" width="154" height="15" uuid="885b9504-1b92-4718-89d7-5df25e9288f8"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<text><![CDATA[Count Date:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="406" y="30" width="154" height="15" uuid="79cc9495-25f9-4d3c-9795-e6913053b93e"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<text><![CDATA[Counted By:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="406" y="54" width="84" height="15" uuid="ce002a24-5943-494d-957b-bff51eae25ac"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<text><![CDATA[Expected Items:]]></text>
+			</staticText>
+			<textField evaluationTime="Report" isBlankWhenNull="true">
+				<reportElement x="490" y="54" width="70" height="15" uuid="5b8e635e-ee61-438e-8bdb-65e518c54071"/>
+				<box>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{expectedCount} + " / " +$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="35" width="90" height="15" uuid="13b856d8-2c82-4db3-b895-43e21fb99217"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Calibri" size="12" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Inventory Group:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="105" y="35" width="195" height="15" uuid="2ed5a92e-368a-44b0-8565-d1dd3f9125d5"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Calibri" size="12" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{groupString}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="11" width="184" height="15" uuid="e8c4dd0a-4662-4db6-82e5-7d0994554ac8"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Calibri" size="12" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Updated in Flex:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="17" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="93" height="17" backcolor="#D8D8D8" uuid="0da0f0e3-6db1-482f-a1f0-fd95c19a3132"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Barcode]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="93" y="0" width="70" height="17" backcolor="#D8D8D8" uuid="d341d95b-c532-42ce-bec7-577262d098d7"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Stencil]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="163" y="0" width="177" height="17" backcolor="#D8D8D8" uuid="51bc90cc-5d99-4425-ab31-7e8deee9755c"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Current Location]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="340" y="0" width="81" height="17" backcolor="#D8D8D8" uuid="e4e05912-6610-4da8-8893-db2f74249221"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Due Back]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="421" y="0" width="150" height="17" backcolor="#D8D8D8" uuid="a0db24c0-b2a8-48ff-b523-10fd39f07442"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Notes]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="17" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="70" height="17" uuid="9a7103b7-fe88-4a37-8402-3933b57e4aa0"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{barCodeID}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="70" y="0" width="23" height="17" uuid="0d4b3e80-8a3b-4406-8cbe-9e08db2683a7"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="93" y="0" width="70" height="17" uuid="f5d3885b-92df-4e82-846b-b6a651102ef0"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{stencil}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="163" y="0" width="177" height="17" uuid="5b13a1a1-74f6-4827-ab12-162240ba91a4"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{showName}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="340" y="0" width="81" height="17" uuid="e5bfb06d-8b08-4efb-a3b0-e124fc22c877"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dueBack}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="421" y="0" width="150" height="17" uuid="3d1a44be-18fa-4114-91e8-01bd7e402dbb"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="10" splitType="Stretch">
+			<textField>
+				<reportElement x="448" y="0" width="100" height="10" uuid="cc1c6755-7fb2-483d-95df-e98ff538b922"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="550" y="0" width="20" height="10" uuid="9acb034a-a5c5-46f7-a0be-1fd242964a75"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="0" width="70" height="10" uuid="80380cec-feff-478c-888b-1efaedcf007b"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Report Generated: "]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd hh:mm">
+				<reportElement x="74" y="0" width="100" height="10" uuid="d8223dcb-9ae2-4f91-9f2e-047f92b46376"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="93" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="1" width="100" height="15" uuid="458f8bc5-8acf-4249-81fa-4044d9f44ea6"/>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[Additional Items:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="16" width="70" height="15" uuid="fa10ef53-206a-475d-8229-1356f035f64b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="93" y="16" width="70" height="15" uuid="16a8a9a7-49b3-403c-aac3-5a88817cba46"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="163" y="16" width="177" height="15" uuid="fca8d0bb-8f66-45e7-af41-7fb1a63aa165"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="340" y="16" width="81" height="15" uuid="3488d3cb-1e17-4a10-ae8e-347a778282b4"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="421" y="16" width="149" height="15" uuid="3bb32dfd-b3ad-43ff-ada0-f5256b5007e8"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="70" y="16" width="23" height="15" uuid="cbfeedd3-6e1d-4386-8c3c-497d1c7c42e8"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="31" width="70" height="15" uuid="6dc1c481-dbe3-498d-8489-bfbeee18b42f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="46" width="70" height="15" uuid="30f912bb-2b95-4054-b8de-a089fc8253f7"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="61" width="70" height="15" uuid="4e377357-5922-43ab-8baf-6609490054c6"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="76" width="70" height="15" uuid="37aa9f60-f6e6-443d-b554-acc4c1cbb093"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="70" y="31" width="23" height="15" uuid="1331e3dd-8761-407d-9940-e1431c5bd39c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="70" y="46" width="23" height="15" uuid="10f4a350-9b14-4ace-aae6-7607836515d4"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="70" y="61" width="23" height="15" uuid="2098136e-618b-40a5-a296-c298f0336bf0"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="70" y="76" width="23" height="15" uuid="cf630638-0938-46b2-8fa6-bc0df8d8f752"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="93" y="31" width="70" height="15" uuid="bed946a1-6027-42c6-932f-04a4b047a35e"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="93" y="46" width="70" height="15" uuid="46413a1e-5b77-4374-9dd7-762d532ae570"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="93" y="61" width="70" height="15" uuid="2895bf0a-f98c-4f5f-81a3-ffdf9294d099"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="93" y="76" width="70" height="15" uuid="f7143fa7-fb48-4bcf-84eb-a615cebefd03"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="163" y="31" width="177" height="15" uuid="1b1ed34e-a5d9-4c4e-a1d8-b005337c8fbc"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="163" y="46" width="177" height="15" uuid="e1a21b53-1bc6-47ed-a99a-80483a0f1806"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="163" y="61" width="177" height="15" uuid="ed49b41d-6a89-42af-8574-b32221b29087"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="163" y="76" width="177" height="15" uuid="1d470eaa-d6ca-4627-8dda-248eb7d8222d"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="340" y="31" width="81" height="15" uuid="a6e20de0-d2f0-4e96-9d37-ddc82239f42b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="340" y="46" width="81" height="15" uuid="be4af72f-2017-4113-a693-31dd4e3ff5c7"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="340" y="61" width="81" height="15" uuid="8fad4b32-89de-4711-bfbb-3a1801083a9b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="340" y="76" width="81" height="15" uuid="0947874b-5724-4ee9-b212-cdf3a34007c0"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="421" y="31" width="149" height="15" uuid="c324edfd-1687-4163-84a2-d8bae9a60827"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="421" y="46" width="149" height="15" uuid="28da82bb-4a03-4398-af84-c8c7c9bdd8d7"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="421" y="61" width="149" height="15" uuid="b9ab6336-08f9-47f4-89b1-801b7cda09d8"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="421" y="76" width="149" height="15" uuid="696dd49d-00cb-4f84-af8c-c03d04f1877a"/>
+			</rectangle>
+			<textField>
+				<reportElement x="190" y="47" width="100" height="30" uuid="38d5daab-de19-440a-804a-ad27f97965eb"/>
+				<textFieldExpression><![CDATA[$V{expectedCount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+	<noData>
+		<band height="54">
+			<staticText>
+				<reportElement x="57" y="10" width="449" height="30" uuid="adf6b1a7-559a-41cc-b5ec-3022d10ab917"/>
+				<textElement>
+					<font fontName="Comic Sans MS" size="20"/>
+				</textElement>
+				<text><![CDATA[There is no data! WHY IS THERE NO DATA!?]]></text>
+			</staticText>
+		</band>
+	</noData>
+</jasperReport>

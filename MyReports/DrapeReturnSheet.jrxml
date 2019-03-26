@@ -1,0 +1,1064 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Drape Return Sheet" pageWidth="792" pageHeight="612" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="30" bottomMargin="20" uuid="bb0fc4ae-574d-48ed-8a6f-ff6fbfc5d3a5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="manifest"/>
+	<parameter name="PROJECT_ELEMENT_ID" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["0f8f2760-757a-11e8-b7e9-00259037e3f4"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="XML_PRODUCER_BEAN_ID" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["data-producer-equipment-list"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="xpath2">
+		<![CDATA[/report/record]]>
+	</queryString>
+	<field name="quantity" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="quantity"/>
+		<fieldDescription><![CDATA[quantity]]></fieldDescription>
+	</field>
+	<field name="preppedQuantity" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="preppedQuantity"/>
+		<fieldDescription><![CDATA[preppedQuantity]]></fieldDescription>
+	</field>
+	<field name="resourceType" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="resourceType"/>
+		<fieldDescription><![CDATA[resourceType]]></fieldDescription>
+	</field>
+	<field name="description" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="description"/>
+		<fieldDescription><![CDATA[description]]></fieldDescription>
+	</field>
+	<field name="noteText" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="noteText"/>
+		<fieldDescription><![CDATA[noteText]]></fieldDescription>
+	</field>
+	<field name="stencil_1" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="stencil"/>
+		<fieldDescription><![CDATA[stencil]]></fieldDescription>
+	</field>
+	<field name="barcode" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="barcode"/>
+		<fieldDescription><![CDATA[barcode]]></fieldDescription>
+	</field>
+	<field name="itemBarcode" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="itemBarcode"/>
+		<fieldDescription><![CDATA[itemBarcode]]></fieldDescription>
+	</field>
+	<field name="countryOfManufacturer_1" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="countryOfManufacturer"/>
+		<fieldDescription><![CDATA[countryOfManufacturer]]></fieldDescription>
+	</field>
+	<field name="weightInPounds" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="weightInPounds"/>
+		<fieldDescription><![CDATA[weightInPounds]]></fieldDescription>
+	</field>
+	<field name="weightInPoundsExtended" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="weightInPoundsExtended"/>
+		<fieldDescription><![CDATA[weightInPoundsExtended]]></fieldDescription>
+	</field>
+	<field name="weightInKilograms" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="weightInKilograms"/>
+		<fieldDescription><![CDATA[weightInKilograms]]></fieldDescription>
+	</field>
+	<field name="weightInKilogramsExtended" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="weightInKilogramsExtended"/>
+		<fieldDescription><![CDATA[weightInKilogramsExtended]]></fieldDescription>
+	</field>
+	<field name="replacementValue" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="replacementValue"/>
+		<fieldDescription><![CDATA[replacementValue]]></fieldDescription>
+	</field>
+	<field name="replacementValueExtended" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="replacementValueExtended"/>
+		<fieldDescription><![CDATA[replacementValueExtended]]></fieldDescription>
+	</field>
+	<field name="itemHeight" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="itemHeight"/>
+		<fieldDescription><![CDATA[itemHeight]]></fieldDescription>
+	</field>
+	<field name="itemWidth" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="itemWidth"/>
+		<fieldDescription><![CDATA[itemWidth]]></fieldDescription>
+	</field>
+	<field name="itemLength" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="itemLength"/>
+		<fieldDescription><![CDATA[itemLength]]></fieldDescription>
+	</field>
+	<field name="shipped" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="shipped"/>
+		<fieldDescription><![CDATA[shipped]]></fieldDescription>
+	</field>
+	<field name="returned" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="returned"/>
+		<fieldDescription><![CDATA[returned]]></fieldDescription>
+	</field>
+	<field name="prepped" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="prepped"/>
+		<fieldDescription><![CDATA[prepped]]></fieldDescription>
+	</field>
+	<field name="prepUser" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="prepUser"/>
+		<fieldDescription><![CDATA[prepUser]]></fieldDescription>
+	</field>
+	<field name="prepTimestamp" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="prepTimestamp"/>
+		<fieldDescription><![CDATA[prepTimestamp]]></fieldDescription>
+	</field>
+	<field name="manufacturer_1" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="manufacturer"/>
+		<fieldDescription><![CDATA[manufacturer]]></fieldDescription>
+	</field>
+	<field name="itemImage" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="itemImage"/>
+		<fieldDescription><![CDATA[itemImage]]></fieldDescription>
+	</field>
+	<field name="itemImageThumbnail" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="itemImageThumbnail"/>
+		<fieldDescription><![CDATA[itemImageThumbnail]]></fieldDescription>
+	</field>
+	<field name="itemInventoryGroupName" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="itemInventoryGroupName"/>
+		<fieldDescription><![CDATA[itemInventoryGroupName]]></fieldDescription>
+	</field>
+	<field name="itemInventoryGroupFullDisplayString" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="itemInventoryGroupFullDisplayString"/>
+		<fieldDescription><![CDATA[itemInventoryGroupFullDisplayString]]></fieldDescription>
+	</field>
+	<field name="purchaseCost" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="purchaseCost"/>
+		<fieldDescription><![CDATA[purchaseCost]]></fieldDescription>
+	</field>
+	<field name="purchaseCostExtended" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="purchaseCostExtended"/>
+		<fieldDescription><![CDATA[purchaseCostExtended]]></fieldDescription>
+	</field>
+	<field name="isVirtual" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="isVirtual"/>
+		<fieldDescription><![CDATA[isVirtual]]></fieldDescription>
+	</field>
+	<field name="isSerial" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="isSerial"/>
+		<fieldDescription><![CDATA[isSerial]]></fieldDescription>
+	</field>
+	<field name="logoImage" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/logoImage]]></fieldDescription>
+	</field>
+	<field name="elementName" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/elementName]]></fieldDescription>
+	</field>
+	<field name="projectManager" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/projectManager]]></fieldDescription>
+	</field>
+	<field name="startDate" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/startDate]]></fieldDescription>
+	</field>
+	<field name="endDate" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/endDate]]></fieldDescription>
+	</field>
+	<field name="venueName" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/venue]]></fieldDescription>
+	</field>
+	<field name="groupName" class="java.lang.String">
+		<fieldDescription><![CDATA[itemInventoryGroupFullDisplayString]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="44" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="1" width="752" height="40" isPrintWhenDetailOverflows="true" forecolor="#000000" uuid="57dcd354-c9a6-4daa-bc9f-1aa61b2b0629"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" size="22" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Drape Return Sheet]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="42" width="751" height="1" uuid="c8263204-6e84-49f0-8b84-f00418e64d5e"/>
+			</line>
+			<image>
+				<reportElement x="12" y="1" width="257" height="40" uuid="cc2b4929-a22b-401e-90c1-58b7997d329d"/>
+				<imageExpression><![CDATA[$F{logoImage} != null ? new URL($F{logoImage}) : null]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="732" y="34" width="19" height="10" uuid="4a8bfb12-f726-40e1-89e4-df5e5a7ba1b7"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<text><![CDATA[v1.2]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="68" splitType="Stretch">
+			<textField>
+				<reportElement positionType="Float" x="0" y="0" width="750" height="25" uuid="35110305-8378-4ba3-9e70-d2f8f81c56fc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Job Name: " + $F{elementName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="9" y="47" width="38" height="16" uuid="7082c572-94ee-4e18-8a82-df9d1205c3cb"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<text><![CDATA[Venue:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="48" y="47" width="272" height="16" uuid="8cbfb174-6e6a-47f7-8e8a-72e44a7eb079"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{venueName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="559" y="31" width="55" height="16" uuid="ee99bd32-bf4b-40e2-9e0b-3efd0fa354c5"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<text><![CDATA[Ship Date:]]></text>
+			</staticText>
+			<textField pattern="TIME_STAMP" isBlankWhenNull="true">
+				<reportElement x="614" y="31" width="135" height="16" uuid="af3bb6e1-b35b-4c38-a6a3-16712cab8337"/>
+				<box leftPadding="3">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{startDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="559" y="48" width="69" height="16" uuid="ef15d743-26f4-4af5-b443-b35df7243f8d"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<text><![CDATA[Return Date:]]></text>
+			</staticText>
+			<textField pattern="TIME_STAMP" isBlankWhenNull="true">
+				<reportElement x="628" y="48" width="121" height="16" uuid="5d952b55-1999-47c3-bc29-e59ae6ebe4e2"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{endDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="9" y="27" width="92" height="16" uuid="60871ee9-d2b5-4f36-97a5-869c61bbcea9"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<text><![CDATA[Project Manager:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="106" y="27" width="214" height="16" uuid="99124829-8750-4c19-a5ef-1abb17000294"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{projectManager}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="55" height="20" forecolor="#000000" uuid="2ac06fb3-6a59-488b-8b8a-803a69e3624c"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+					<font fontName="Calibri" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Returned?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="55" y="0" width="70" height="20" forecolor="#000000" uuid="80a477c6-7b8b-4919-b647-b3cb36578475"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Barcode]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="125" y="0" width="251" height="20" forecolor="#000000" uuid="4a457046-b3cd-4767-8a9a-287516f5cafb"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Item Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="376" y="0" width="252" height="20" forecolor="#000000" uuid="4b90bc66-5f4e-4ffd-b8cc-e6800862d7cd"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Damage?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="628" y="0" width="122" height="20" forecolor="#000000" uuid="8af1e922-b9ee-41e7-9e2a-31b4b9654e59"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Show Ready?]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<printWhenExpression><![CDATA[$F{groupName}.startsWith("Rental > Drape") && !$F{groupName}.endsWith("Drape Hardware") && !$F{groupName}.endsWith("Drape Bins")]]></printWhenExpression>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="125" y="0" width="251" height="18" uuid="2cbf930c-b07c-4ab9-aca2-f90f1b73ae35"/>
+				<box topPadding="0" leftPadding="4" bottomPadding="1" rightPadding="0">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Calibri" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="55" y="0" width="70" height="18" isPrintWhenDetailOverflows="true" uuid="f1e27022-3068-44aa-8b37-c7b919536043"/>
+				<box topPadding="0" leftPadding="3" bottomPadding="1" rightPadding="0">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Calibri" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{barcode}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="376" y="0" width="252" height="18" uuid="8dd50af2-edec-4b6f-b3b1-554d3b1d6524"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="55" height="18" uuid="8d051323-43fc-40be-9c08-02493a335fae"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="628" y="0" width="122" height="18" uuid="4087a3b9-139c-4ad6-b76c-28a8db6d63a5"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="631" y="6" width="80" height="20" uuid="8644008c-6cd9-4847-936a-42e58aa89485"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Bitstream Vera Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="711" y="6" width="40" height="20" uuid="ea7aef87-86f9-489b-a90c-8c9513107c40"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Bitstream Vera Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMM d, yyyy h:mm a z">
+				<reportElement x="82" y="12" width="95" height="14" uuid="ee2dcdef-64ce-4b48-a57a-94be61d03579"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="Bitstream Vera Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="12" width="82" height="14" uuid="6735649c-4969-48bb-b938-f3f7e80a7602"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="Bitstream Vera Sans" size="8"/>
+				</textElement>
+				<text><![CDATA[Report generated:]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="217" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="16" width="55" height="18" uuid="48612191-9fa1-4d57-bf85-0e39f95681ac"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="1" width="100" height="15" uuid="619f5c66-0c65-4e2f-bc1e-da3cec2d2ac9"/>
+				<text><![CDATA[Additional Items:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="55" y="16" width="70" height="18" uuid="846ea5b5-5b0a-43cc-948f-321076297b7a"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="125" y="16" width="251" height="18" uuid="d4d0f6f4-8e9b-445b-b2f8-76e462ba56ed"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="376" y="16" width="252" height="18" uuid="4f5dd425-8856-47ba-b0f9-2db874d7905a"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="628" y="16" width="122" height="18" uuid="8e9e2e3d-d407-4d4a-8265-7a9559521b63"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="34" width="55" height="18" uuid="fe31c68e-0c64-4ddb-88d6-e6dcc30b42eb"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="52" width="55" height="18" uuid="d560386c-2068-4b5c-950a-69bbde413ad9"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="70" width="55" height="18" uuid="1aed0a56-7225-48f3-8dfc-ef4a45df23a8"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="88" width="55" height="18" uuid="821acc4c-715a-4305-bb7f-03253525bc14"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="106" width="55" height="18" uuid="f1b1c8f2-de67-4433-b9ae-fb6ecfe2ee04"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="124" width="55" height="18" uuid="adccb809-d685-43ad-bc9e-ef2a5d2f5fdc"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="142" width="55" height="18" uuid="1a90769a-6b19-4b07-9271-605f6e96a7ee"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="160" width="55" height="18" uuid="ae0ad618-288d-4f29-8ede-1dbfbd935232"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="178" width="55" height="18" uuid="1145a2c7-e501-486c-abab-9114c0464a26"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="55" y="34" width="70" height="18" uuid="85344d4b-b245-44c0-89e8-d1713a5af6fe"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="55" y="52" width="70" height="18" uuid="e0aaed34-bc73-48f7-8f41-61ae66ea9917"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="55" y="70" width="70" height="18" uuid="72b37cec-a81e-4ca8-8dd1-4cbd64853c3e"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="55" y="88" width="70" height="18" uuid="8ef622ba-0112-40e6-893f-6ba8db96bda1"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="55" y="106" width="70" height="18" uuid="721c7e81-8bc4-4b5d-bec6-b38abf09edae"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="55" y="124" width="70" height="18" uuid="a1820304-9c5d-49e2-a7bd-e7cac96b3358"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="55" y="142" width="70" height="18" uuid="dbd43774-4132-4e1f-8918-b80595e7b01b"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="55" y="160" width="70" height="18" uuid="324bb65c-c621-49a6-b13d-2766821f24a5"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="55" y="178" width="70" height="18" uuid="0377dbd3-1f2d-4fae-93ea-d62de3cb379a"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="125" y="34" width="251" height="18" uuid="ca2473c2-d81b-478c-995f-ff98a40f6c7c"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="125" y="52" width="251" height="18" uuid="5d75ca6d-7e47-447c-bb78-2d8e84146708"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="125" y="70" width="251" height="18" uuid="ad1ad805-5c9f-4c6c-ae82-f2b68dde074c"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="125" y="88" width="251" height="18" uuid="d6b60d80-4033-467b-8406-833d46b6d280"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="125" y="106" width="251" height="18" uuid="77657540-ea99-4b99-81ba-7726ad14f58e"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="125" y="124" width="251" height="18" uuid="414a3ff9-22c6-4049-b012-b704fb6933fc"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="125" y="142" width="251" height="18" uuid="d3f9005d-692c-406c-adc3-7917516249b0"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="125" y="160" width="251" height="18" uuid="2d45a1e4-9185-4094-9f46-17656c8cbdae"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="125" y="178" width="251" height="18" uuid="08a6f6d4-68a5-4764-80ca-bc0c032dcb89"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="376" y="34" width="252" height="18" uuid="7ace24c3-2cff-4db4-93b5-915d5b0ef122"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="376" y="52" width="252" height="18" uuid="82bc6699-fdb6-4257-bf1d-b050001e1262"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="376" y="70" width="252" height="18" uuid="3b6a535f-7519-4718-94cd-c043cc1dfd9c"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="376" y="88" width="252" height="18" uuid="31d9456e-2a0a-4a3d-8887-c12685271258"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="376" y="106" width="252" height="18" uuid="802684e4-6a45-4e72-91e7-9a85bee406ad"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="376" y="124" width="252" height="18" uuid="d761df1c-371f-4cff-955c-24affc0a0536"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="376" y="142" width="252" height="18" uuid="0718d94f-bbdb-48f4-997e-915617838800"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="376" y="160" width="252" height="18" uuid="adb0ef71-3b2f-4d19-b72e-46265c99f6ac"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="376" y="178" width="252" height="18" uuid="141fad59-9bd8-41bc-9296-eb3080c136d6"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="628" y="34" width="122" height="18" uuid="f2b891cb-a5da-49c0-8521-ca044c0921ce"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="628" y="52" width="122" height="18" uuid="7457a3b6-12a4-4e33-a470-72abc17c2baf"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="628" y="70" width="122" height="18" uuid="4e841c72-3ff2-4f08-81a3-87a34260ab51"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="628" y="88" width="122" height="18" uuid="5890bc6b-8585-47f9-8c5b-4b545d4a1881"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="628" y="106" width="122" height="18" uuid="cbdbc06d-c8b9-4f6e-b90c-a84a0600f514"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="628" y="124" width="122" height="18" uuid="ffd091d5-dd55-4c24-9b3c-d58c10649604"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="628" y="142" width="122" height="18" uuid="33023545-0a64-44e9-82f9-26669737f5fe"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="628" y="160" width="122" height="18" uuid="8554cb1b-912e-4f89-b89c-3502761c99b9"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="628" y="178" width="122" height="18" uuid="690c5d17-c09c-4f36-adf2-6a280c2f8a50"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+		</band>
+	</summary>
+	<noData>
+		<band height="50">
+			<staticText>
+				<reportElement x="0" y="15" width="752" height="20" uuid="e4a72a52-b989-4604-b2df-e4b26c0b9c4a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[There is no data to display, probably because something broke. Tell John!]]></text>
+			</staticText>
+		</band>
+	</noData>
+</jasperReport>

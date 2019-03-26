@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Drape Return Sheet" pageWidth="792" pageHeight="612" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="30" bottomMargin="20" uuid="bb0fc4ae-574d-48ed-8a6f-ff6fbfc5d3a5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="jobbox.xml"/>
+	<parameter name="PROJECT_ELEMENT_ID" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="XML_PRODUCER_BEAN_ID" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["data-producer-equipment-list"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="xpath2">
+		<![CDATA[/report/record/description]]>
+	</queryString>
+	<field name="corporateIdentityName" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="corporateIdentityName"/>
+		<fieldDescription><![CDATA[corporateIdentityName]]></fieldDescription>
+	</field>
+	<field name="generateDate" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="generateDate"/>
+		<fieldDescription><![CDATA[generateDate]]></fieldDescription>
+	</field>
+	<field name="logoImage" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="logoImage"/>
+		<fieldDescription><![CDATA[logoImage]]></fieldDescription>
+	</field>
+	<field name="numberCaption" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="numberCaption"/>
+		<fieldDescription><![CDATA[numberCaption]]></fieldDescription>
+	</field>
+	<field name="number" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="number"/>
+		<fieldDescription><![CDATA[number]]></fieldDescription>
+	</field>
+	<field name="dateCreated" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="dateCreated"/>
+		<fieldDescription><![CDATA[dateCreated]]></fieldDescription>
+	</field>
+	<field name="elementName" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="elementName"/>
+		<fieldDescription><![CDATA[elementName]]></fieldDescription>
+	</field>
+	<field name="elementNameCaption" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="elementNameCaption"/>
+		<fieldDescription><![CDATA[elementNameCaption]]></fieldDescription>
+	</field>
+	<field name="elementDefinitionName" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="elementDefinitionName"/>
+		<fieldDescription><![CDATA[elementDefinitionName]]></fieldDescription>
+	</field>
+	<field name="parentElementName" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="parentElementName"/>
+		<fieldDescription><![CDATA[parentElementName]]></fieldDescription>
+	</field>
+	<field name="parentElementNumber" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="parentElementNumber"/>
+		<fieldDescription><![CDATA[parentElementNumber]]></fieldDescription>
+	</field>
+	<field name="topLevelElementName" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="topLevelElementName"/>
+		<fieldDescription><![CDATA[topLevelElementName]]></fieldDescription>
+	</field>
+	<field name="topLevelElementNumber" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="topLevelElementNumber"/>
+		<fieldDescription><![CDATA[topLevelElementNumber]]></fieldDescription>
+	</field>
+	<field name="createdBy" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="createdBy"/>
+		<fieldDescription><![CDATA[createdBy]]></fieldDescription>
+	</field>
+	<field name="createdDateTime" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="createdDateTime"/>
+		<fieldDescription><![CDATA[createdDateTime]]></fieldDescription>
+	</field>
+	<field name="modifiedBy" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="modifiedBy"/>
+		<fieldDescription><![CDATA[modifiedBy]]></fieldDescription>
+	</field>
+	<field name="modifiedDateTime" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="modifiedDateTime"/>
+		<fieldDescription><![CDATA[modifiedDateTime]]></fieldDescription>
+	</field>
+	<field name="locationCaption" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="locationCaption"/>
+		<fieldDescription><![CDATA[locationCaption]]></fieldDescription>
+	</field>
+	<field name="leftAddressCaption" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="leftAddressCaption"/>
+		<fieldDescription><![CDATA[leftAddressCaption]]></fieldDescription>
+	</field>
+	<field name="leftAddressBlock" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="leftAddressBlock"/>
+		<fieldDescription><![CDATA[leftAddressBlock]]></fieldDescription>
+	</field>
+	<field name="rightAddressCaption" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="rightAddressCaption"/>
+		<fieldDescription><![CDATA[rightAddressCaption]]></fieldDescription>
+	</field>
+	<field name="rightAddressBlock" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="rightAddressBlock"/>
+		<fieldDescription><![CDATA[rightAddressBlock]]></fieldDescription>
+	</field>
+	<field name="startDate" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="startDate"/>
+		<fieldDescription><![CDATA[startDate]]></fieldDescription>
+	</field>
+	<field name="endDate" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="endDate"/>
+		<fieldDescription><![CDATA[endDate]]></fieldDescription>
+	</field>
+	<field name="startDateCaption" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="startDateCaption"/>
+		<fieldDescription><![CDATA[startDateCaption]]></fieldDescription>
+	</field>
+	<field name="endDateCaption" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="endDateCaption"/>
+		<fieldDescription><![CDATA[endDateCaption]]></fieldDescription>
+	</field>
+	<field name="clientCaption" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="clientCaption"/>
+		<fieldDescription><![CDATA[clientCaption]]></fieldDescription>
+	</field>
+	<field name="client" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="client"/>
+		<fieldDescription><![CDATA[client]]></fieldDescription>
+	</field>
+	<field name="clientCompanyName" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="clientCompanyName"/>
+		<fieldDescription><![CDATA[clientCompanyName]]></fieldDescription>
+	</field>
+	<field name="clientAddressBlock" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="clientAddressBlock"/>
+		<fieldDescription><![CDATA[clientAddressBlock]]></fieldDescription>
+	</field>
+	<field name="venueCaption" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="venueCaption"/>
+		<fieldDescription><![CDATA[venueCaption]]></fieldDescription>
+	</field>
+	<field name="venue" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="venue"/>
+		<fieldDescription><![CDATA[venue]]></fieldDescription>
+	</field>
+	<field name="venueAddressBlock" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="venueAddressBlock"/>
+		<fieldDescription><![CDATA[venueAddressBlock]]></fieldDescription>
+	</field>
+	<field name="venueSingleLineAddressString" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="venueSingleLineAddressString"/>
+		<fieldDescription><![CDATA[venueSingleLineAddressString]]></fieldDescription>
+	</field>
+	<field name="venueAddress" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="venueAddress"/>
+		<fieldDescription><![CDATA[venueAddress]]></fieldDescription>
+	</field>
+	<field name="personResponsibleCaption" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="personResponsibleCaption"/>
+		<fieldDescription><![CDATA[personResponsibleCaption]]></fieldDescription>
+	</field>
+	<field name="personResponsible" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="personResponsible"/>
+		<fieldDescription><![CDATA[personResponsible]]></fieldDescription>
+	</field>
+	<field name="personResponsibleDefaultPhone" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="personResponsibleDefaultPhone"/>
+		<fieldDescription><![CDATA[personResponsibleDefaultPhone]]></fieldDescription>
+	</field>
+	<field name="personResponsibleDefaultEmail" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="personResponsibleDefaultEmail"/>
+		<fieldDescription><![CDATA[personResponsibleDefaultEmail]]></fieldDescription>
+	</field>
+	<field name="status" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="status"/>
+		<fieldDescription><![CDATA[status]]></fieldDescription>
+	</field>
+	<field name="totalReplacementValue" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="totalReplacementValue"/>
+		<fieldDescription><![CDATA[totalReplacementValue]]></fieldDescription>
+	</field>
+	<field name="totalWeightInPounds" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="totalWeightInPounds"/>
+		<fieldDescription><![CDATA[totalWeightInPounds]]></fieldDescription>
+	</field>
+	<field name="customFieldOneCaption" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="customFieldOneCaption"/>
+		<fieldDescription><![CDATA[customFieldOneCaption]]></fieldDescription>
+	</field>
+	<field name="customFieldTwoCaption" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="customFieldTwoCaption"/>
+		<fieldDescription><![CDATA[customFieldTwoCaption]]></fieldDescription>
+	</field>
+	<field name="customOneContactCaption" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="customOneContactCaption"/>
+		<fieldDescription><![CDATA[customOneContactCaption]]></fieldDescription>
+	</field>
+	<field name="customOneContactName" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="customOneContactName"/>
+		<fieldDescription><![CDATA[customOneContactName]]></fieldDescription>
+	</field>
+	<field name="customOneContactAddress" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="customOneContactAddress"/>
+		<fieldDescription><![CDATA[customOneContactAddress]]></fieldDescription>
+	</field>
+	<field name="customOneContactSingleLineAddressString" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="customOneContactSingleLineAddressString"/>
+		<fieldDescription><![CDATA[customOneContactSingleLineAddressString]]></fieldDescription>
+	</field>
+	<field name="customOneContactDefaultPhoneNumber" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="customOneContactDefaultPhoneNumber"/>
+		<fieldDescription><![CDATA[customOneContactDefaultPhoneNumber]]></fieldDescription>
+	</field>
+	<field name="customOneContactMobilePhoneNumber" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="customOneContactMobilePhoneNumber"/>
+		<fieldDescription><![CDATA[customOneContactMobilePhoneNumber]]></fieldDescription>
+	</field>
+	<field name="customOneContactDefaultFaxNumber" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="customOneContactDefaultFaxNumber"/>
+		<fieldDescription><![CDATA[customOneContactDefaultFaxNumber]]></fieldDescription>
+	</field>
+	<field name="customOneContactDefaultEmail" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="customOneContactDefaultEmail"/>
+		<fieldDescription><![CDATA[customOneContactDefaultEmail]]></fieldDescription>
+	</field>
+	<field name="customTwoContactCaption" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="customTwoContactCaption"/>
+		<fieldDescription><![CDATA[customTwoContactCaption]]></fieldDescription>
+	</field>
+	<field name="customThreeContactCaption" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="customThreeContactCaption"/>
+		<fieldDescription><![CDATA[customThreeContactCaption]]></fieldDescription>
+	</field>
+	<field name="description" class="java.lang.String">
+		<fieldDescription><![CDATA[child::text()]]></fieldDescription>
+	</field>
+	<field name="quantity" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/record/quantity]]></fieldDescription>
+	</field>
+	<field name="stencil" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/record/stencil]]></fieldDescription>
+	</field>
+	<field name="barcode" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/record/barcode]]></fieldDescription>
+	</field>
+	<field name="containerStencil" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/record/containerStencil]]></fieldDescription>
+	</field>
+	<field name="containerDescription" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/record/containerDescription]]></fieldDescription>
+	</field>
+	<field name="itemInventoryGroupName" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/record/itemInventoryGroupName]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="10" width="752" height="40" isPrintWhenDetailOverflows="true" forecolor="#000000" uuid="57dcd354-c9a6-4daa-bc9f-1aa61b2b0629"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Bitstream Vera Sans" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Return Sheet - Job Box / Compressor Kit]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="51" width="751" height="1" uuid="c8263204-6e84-49f0-8b84-f00418e64d5e"/>
+			</line>
+			<image>
+				<reportElement x="12" y="11" width="257" height="40" uuid="cc2b4929-a22b-401e-90c1-58b7997d329d"/>
+				<imageExpression><![CDATA[$F{logoImage} != null ? new URL($F{logoImage}) : null]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="70" splitType="Stretch">
+			<textField>
+				<reportElement positionType="Float" x="378" y="0" width="374" height="25" uuid="35110305-8378-4ba3-9e70-d2f8f81c56fc"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Bitstream Vera Sans" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{elementName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="71" y="40" width="38" height="16" uuid="7082c572-94ee-4e18-8a82-df9d1205c3cb"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Bitstream Vera Sans"/>
+				</textElement>
+				<text><![CDATA[Venue:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="110" y="40" width="200" height="16" uuid="8cbfb174-6e6a-47f7-8e8a-72e44a7eb079"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Bitstream Vera Sans" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{venue}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="310" y="40" width="64" height="16" uuid="ee99bd32-bf4b-40e2-9e0b-3efd0fa354c5"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Bitstream Vera Sans"/>
+				</textElement>
+				<text><![CDATA[Ship Date:]]></text>
+			</staticText>
+			<textField pattern="TIME_STAMP" isBlankWhenNull="true">
+				<reportElement x="376" y="40" width="124" height="16" uuid="af3bb6e1-b35b-4c38-a6a3-16712cab8337"/>
+				<box leftPadding="3">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Bitstream Vera Sans" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{startDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="560" y="40" width="79" height="16" uuid="ef15d743-26f4-4af5-b443-b35df7243f8d"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Bitstream Vera Sans"/>
+				</textElement>
+				<text><![CDATA[Return Date:]]></text>
+			</staticText>
+			<textField pattern="TIME_STAMP" isBlankWhenNull="true">
+				<reportElement x="639" y="40" width="101" height="16" uuid="5d952b55-1999-47c3-bc29-e59ae6ebe4e2"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Bitstream Vera Sans" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{endDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="0" width="84" height="25" uuid="c56a21aa-c7cf-4b95-9aa6-4b0a82fd2a4b"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Bitstream Vera Sans" size="16"/>
+				</textElement>
+				<text><![CDATA[Job Name:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="55" height="20" forecolor="#000000" uuid="2ac06fb3-6a59-488b-8b8a-803a69e3624c"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+					<font fontName="Bitstream Vera Sans" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RETURNED?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="55" y="0" width="70" height="20" forecolor="#000000" uuid="80a477c6-7b8b-4919-b647-b3cb36578475"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bitstream Vera Sans" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BARCODE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="125" y="0" width="251" height="20" forecolor="#000000" uuid="4a457046-b3cd-4767-8a9a-287516f5cafb"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bitstream Vera Sans" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ITEM NAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="376" y="0" width="252" height="20" forecolor="#000000" uuid="4b90bc66-5f4e-4ffd-b8cc-e6800862d7cd"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bitstream Vera Sans" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DAMAGE?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="628" y="0" width="122" height="20" forecolor="#000000" uuid="8af1e922-b9ee-41e7-9e2a-31b4b9654e59"/>
+				<box leftPadding="3" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Bitstream Vera Sans" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SHOW READY?]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<printWhenExpression><![CDATA[$F{groupName}.startsWith("Rental > Drape") && !$F{groupName}.endsWith("Drape Hardware") && !$F{groupName}.endsWith("Drape Bins")]]></printWhenExpression>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="125" y="0" width="251" height="18" uuid="2cbf930c-b07c-4ab9-aca2-f90f1b73ae35"/>
+				<box topPadding="0" leftPadding="4" bottomPadding="1" rightPadding="0">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Bitstream Vera Sans" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="55" y="0" width="70" height="18" isPrintWhenDetailOverflows="true" uuid="f1e27022-3068-44aa-8b37-c7b919536043"/>
+				<box topPadding="0" leftPadding="3" bottomPadding="1" rightPadding="0">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Bitstream Vera Sans Mono" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{barcode}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="376" y="0" width="252" height="18" uuid="8dd50af2-edec-4b6f-b3b1-554d3b1d6524"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="55" height="18" uuid="8d051323-43fc-40be-9c08-02493a335fae"/>
+				<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="3">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="628" y="0" width="122" height="18" uuid="4087a3b9-139c-4ad6-b76c-28a8db6d63a5"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="631" y="6" width="80" height="20" uuid="8644008c-6cd9-4847-936a-42e58aa89485"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Bitstream Vera Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="711" y="6" width="40" height="20" uuid="ea7aef87-86f9-489b-a90c-8c9513107c40"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Bitstream Vera Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMM d, yyyy h:mm a z">
+				<reportElement x="82" y="12" width="95" height="14" uuid="ee2dcdef-64ce-4b48-a57a-94be61d03579"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="Bitstream Vera Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="12" width="82" height="14" uuid="6735649c-4969-48bb-b938-f3f7e80a7602"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="Bitstream Vera Sans" size="8"/>
+				</textElement>
+				<text><![CDATA[Report generated:]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="37" splitType="Stretch">
+			<printWhenExpression><![CDATA[$V{REPORT_COUNT} == 0]]></printWhenExpression>
+			<staticText>
+				<reportElement x="269" y="7" width="271" height="15" uuid="17a22fe1-451d-440e-8c71-2fe37326c71a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[No drape items were found for this manifest.]]></text>
+			</staticText>
+		</band>
+	</summary>
+	<noData>
+		<band height="50">
+			<staticText>
+				<reportElement x="0" y="15" width="752" height="20" uuid="e4a72a52-b989-4604-b2df-e4b26c0b9c4a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[There is no data to display, probably because something broke. Tell John!]]></text>
+			</staticText>
+		</band>
+	</noData>
+</jasperReport>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SceneryLabels" pageWidth="612" pageHeight="792" columnWidth="612" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="c1bcea28-9375-4743-85b0-e6745e5f9a7b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RH345"/>
+	<parameter name="PROJECT_ELEMENT_ID" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="XML_PRODUCER_BEAN_ID" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["data-producer-equipment-list"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="XPath">
+		<![CDATA[/report/record]]>
+	</queryString>
+	<field name="barcode" class="java.lang.String">
+		<fieldDescription><![CDATA[barcode]]></fieldDescription>
+	</field>
+	<field name="isVirtual" class="java.lang.String">
+		<fieldDescription><![CDATA[isVirtual]]></fieldDescription>
+	</field>
+	<field name="itemInventoryGroupFullDisplayString" class="java.lang.String">
+		<fieldDescription><![CDATA[itemInventoryGroupFullDisplayString]]></fieldDescription>
+	</field>
+	<field name="quantity" class="java.lang.String">
+		<fieldDescription><![CDATA[quantity]]></fieldDescription>
+	</field>
+	<field name="description" class="java.lang.String">
+		<fieldDescription><![CDATA[description]]></fieldDescription>
+	</field>
+	<field name="purchasedDate" class="java.lang.String">
+		<fieldDescription><![CDATA[purchasedDate]]></fieldDescription>
+	</field>
+	<field name="clientCompanyName" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/clientCompanyName]]></fieldDescription>
+	</field>
+	<field name="elementName" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/elementName]]></fieldDescription>
+	</field>
+	<field name="number" class="java.lang.String">
+		<fieldDescription><![CDATA[/report/number]]></fieldDescription>
+	</field>
+	<variable name="clientName" class="java.lang.String">
+		<variableExpression><![CDATA[$F{clientCompanyName}]]></variableExpression>
+	</variable>
+	<variable name="showName" class="java.lang.String">
+		<variableExpression><![CDATA[$F{elementName}]]></variableExpression>
+	</variable>
+	<variable name="jobNumber" class="java.lang.String">
+		<variableExpression><![CDATA[$F{number}]]></variableExpression>
+	</variable>
+	<title>
+		<band height="33"/>
+	</title>
+	<detail>
+		<band height="147" splitType="Stretch">
+			<printWhenExpression><![CDATA[$F{itemInventoryGroupFullDisplayString}.startsWith("Custom")]]></printWhenExpression>
+			<textField>
+				<reportElement x="210" y="76" width="375" height="50" uuid="ce8890d3-3cd9-4bc0-bb90-92438ea66686"/>
+				<textElement textAlignment="Center">
+					<font fontName="Helvetica" size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{description}.trim()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="530" y="10" width="60" height="12" uuid="d62e9717-154a-4790-99a9-7609ca9a56ab"/>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{purchasedDate}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="49" y="93" width="100" height="50" uuid="049f9991-c747-4ac1-adb0-1c2de396c83b"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barHeight="75">
+					<jr:codeExpression><![CDATA[$F{barcode}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<textField>
+				<reportElement x="256" y="10" width="184" height="12" uuid="d8cc79e4-f9f9-4fab-b9b1-dbab540f1cfe"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{clientName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="25" width="375" height="48" uuid="9f976115-55ab-4750-a7f6-642a43f41a00"/>
+				<textElement textAlignment="Center">
+					<font fontName="Helvetica" size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{showName}.trim()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="93" width="20" height="50" uuid="22606b88-da96-4923-bd98-5c586c186de3"/>
+				<textElement rotation="Right"/>
+				<textFieldExpression><![CDATA[$F{barcode}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
