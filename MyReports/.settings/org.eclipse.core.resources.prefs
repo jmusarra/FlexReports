@@ -1,5 +1,7 @@
 eclipse.preferences.version=1
 encoding/ClientStorageInventory.jrxml=UTF-8
+encoding/ClientStorageInventoryv2.jrxml=UTF-8
+encoding/ClientStorageInventoryv3.jrxml=UTF-8
 encoding/CountSheetNonSerialized.jrxml=UTF-8
 encoding/CustomItemLabels-noImage.jrxml=UTF-8
 encoding/CustomItemLabels.jrxml=UTF-8
