@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="InventoryCountSheet" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" uuid="e4eed755-cd8f-4e9e-86b5-3d793aa28f9f">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="stagehouse.mysql"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="277"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="723"/>
+	<property name="com.jaspersoft.studio.report.description" value="Stage House - Client Storage Inventory Report"/>
+	<parameter name="GROUP_ID" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT 
+    gr.full_display_string as groupString,
+    r.display_string AS itemName,
+    r.bar_code_id AS barCode,
+    i.manufacturer AS Manufacturer,
+    q.quantity as qty
+    
+FROM st_biz_managed_resource AS r
+JOIN st_ivt_inventory_item AS i ON r.id = i.id
+JOIN st_ivt_inventory_group AS gr ON i.group_id = gr.id
+LEFT JOIN st_ivt_qty_matrix AS q ON r.id = q.item_id
+
+WHERE
+    gr.full_display_string LIKE (SELECT 
+            CONCAT(g3.group_name, ' > ', g2.group_name, '%') AS whereString
+        FROM st_ivt_inventory_group AS g
+        LEFT OUTER JOIN st_ivt_inventory_group AS g2 ON (g2.id = g.parent_group_id)
+        LEFT OUTER JOIN st_ivt_inventory_group AS g3 ON (g3.id = g2.parent_group_id)
+        WHERE g2.id = $P{GROUP_ID}
+		LIMIT 1)
+AND gr.full_display_string NOT LIKE '%Recycle Bin%'
+AND r.is_deleted = 0
+AND i.virtual_item = 0
+AND i.expendable = 0
+AND q.stock_type_id = '49ae97a0-5546-11e7-bff2-00259037e3f4'
+AND q.quantity >= 0
+AND i.tracked_by_sn = 0
+UNION
+SELECT
+    g.full_display_string as groupString,
+    r.display_string as itemName,
+    r.bar_code_id as barCode,
+    i.manufacturer as Manufacturer,
+    COUNT(r.display_string) as Quantity
+    
+FROM st_biz_managed_resource as r
+JOIN st_ivt_inventory_item as i on r.id = i.id
+JOIN st_ivt_inventory_group as g on g.id = i.group_id
+JOIN st_ivt_serial_number AS s ON s.item_id = r.id
+
+WHERE g.full_display_string LIKE (SELECT 
+            CONCAT(g3.group_name, ' > ', g2.group_name, '%') AS whereString
+        FROM st_ivt_inventory_group AS g
+        LEFT OUTER JOIN st_ivt_inventory_group AS g2 ON (g2.id = g.parent_group_id)
+        LEFT OUTER JOIN st_ivt_inventory_group AS g3 ON (g3.id = g2.parent_group_id)
+        WHERE g2.id = $P{GROUP_ID}
+        LIMIT 1)
+AND g.full_display_string NOT LIKE "%Recycle Bin%"
+AND r.is_deleted = 0
+AND s.is_deleted = 0
+AND i.tracked_by_sn
+AND s.is_decommissioned = 0
+GROUP BY r.rc_number
+ORDER BY groupString, itemName ASC]]>
+	</queryString>
+	<field name="groupString" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="groupString"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="st_ivt_inventory_item"/>
+	</field>
+	<field name="Barcode" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="barCode"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="st_biz_managed_resource"/>
+	</field>
+	<field name="itemName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="itemName"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="st_biz_managed_resource"/>
+	</field>
+	<field name="qty" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="qty"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="st_ivt_allocated_qty_matrix"/>
+	</field>
+	<field name="Manufacturer" class="java.lang.String"/>
+	<group name="Group1" keepTogether="true">
+		<groupExpression><![CDATA[$F{groupString}.split(">")[2].trim()]]></groupExpression>
+		<groupHeader>
+			<band height="17">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="0" y="0" width="571" height="17" backcolor="#CCCCCC" uuid="0806813d-952d-42cc-96d4-a3dfbdd9d6cd"/>
+					<box leftPadding="12">
+						<topPen lineWidth="1.5"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.5"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Calibri" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{groupString}.split(">")[2].trim()]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="51" splitType="Stretch">
+			<image>
+				<reportElement x="12" y="11" width="188" height="38" uuid="e89ccc90-d932-42e4-8ab6-d5a2a0b222ce"/>
+				<imageExpression><![CDATA["https://raw.githubusercontent.com/stagehouse/FlexReports/master/resources/StageHouseLogo_256x50.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="454" y="11" width="108" height="40" uuid="bc387a5c-1ad8-404b-90a2-45b3ffba5b25"/>
+				<textElement>
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<text><![CDATA[5075 W Diablo Dr
+Las Vegas NV 89118
+702-476-0056
+http://www.stagehouselv.com]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="454" y="0" width="100" height="20" uuid="114b83f2-1bca-431d-98b0-a38db659c5e7"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Stage House]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="2" width="454" height="15" uuid="9b9d5ee7-3f75-4912-9d31-d50dc825d766"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Calibri" size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Managed Inventory Report - " + $F{groupString}.split(">")[1].trim()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="250" height="20" forecolor="#FFFFFF" backcolor="#9E9E9E" uuid="0da0f0e3-6db1-482f-a1f0-fd95c19a3132"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Item Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="320" y="0" width="200" height="20" forecolor="#FFFFFF" backcolor="#9E9E9E" uuid="51bc90cc-5d99-4425-ab31-7e8deee9755c"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Manufacturer]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="520" y="0" width="51" height="20" forecolor="#FFFFFF" backcolor="#9E9E9E" uuid="e4e05912-6610-4da8-8893-db2f74249221"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qty]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="250" y="0" width="70" height="20" forecolor="#FFFFFF" backcolor="#9E9E9E" uuid="1040d397-3cc2-4fbf-b9e5-6fe8e8864957"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Barcode]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="17" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="250" height="17" uuid="f5d3885b-92df-4e82-846b-b6a651102ef0"/>
+				<box leftPadding="4">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{itemName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="320" y="0" width="200" height="17" uuid="e5bfb06d-8b08-4efb-a3b0-e124fc22c877"/>
+				<box leftPadding="4">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Manufacturer}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="520" y="0" width="51" height="17" uuid="d6b0ad0a-2479-48e9-9821-cc5a6221f25c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3c5289a4-70b6-4d53-a7ee-4c819ba6bdce"/>
+				</reportElement>
+				<box leftPadding="4">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="0" width="70" height="17" uuid="02b302db-3e76-4575-af45-6acc1af17890">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5d784e36-95a6-47f9-aaa0-305b225a456d"/>
+				</reportElement>
+				<box leftPadding="4">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Barcode}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="450" y="0" width="100" height="10" uuid="cc1c6755-7fb2-483d-95df-e98ff538b922"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="551" y="0" width="20" height="10" uuid="9acb034a-a5c5-46f7-a0be-1fd242964a75"/>
+				<textElement textAlignment="Left">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="0" width="70" height="10" uuid="c6620926-e38a-4295-97c8-bcfa746eed61"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Report Generated: "]]></textFieldExpression>
+			</textField>
+			<textField pattern="MM/dd/yy hh:mm">
+				<reportElement x="74" y="0" width="100" height="10" uuid="1fd61355-e0eb-4d3f-afcb-4c607cc78215"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<noData>
+		<band height="54">
+			<staticText>
+				<reportElement x="57" y="10" width="449" height="30" uuid="adf6b1a7-559a-41cc-b5ec-3022d10ab917"/>
+				<textElement>
+					<font fontName="Comic Sans MS" size="20"/>
+				</textElement>
+				<text><![CDATA[There is no data! WHY IS THERE NO DATA!?]]></text>
+			</staticText>
+		</band>
+	</noData>
+</jasperReport>
