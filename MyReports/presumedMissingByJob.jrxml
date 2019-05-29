@@ -1,51 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PresumedMissing" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="845dc4ff-8042-4374-835a-1c3384bbf4ef">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PresumedMissingByJob" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="845dc4ff-8042-4374-835a-1c3384bbf4ef">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="stagehouse.mysql"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.report.description" value="Stage House - Presumed Missing By Job"/>
 	<queryString>
 		<![CDATA[SELECT 
-    CONVERT_TZ(scan_timestamp, 'UTC', 'US/Pacific') AS 'Last Record',
-    p.element_name AS 'Show Name',
-    g.full_display_string AS 'Group',
+    scan_timestamp AS lastRecord,
+    p.element_name AS showName,
+    p2.document_number AS woNumber,
+    p2.id,
+    g.full_display_string AS groupString,
     p.planned_end_date,
-    m.display_string AS 'Item Name',
+    m.display_string AS itemName,
     s.bar_code_id,
     sn.stencil,
     i.replacement_cost,
     s.scan_mode,
-    s.is_virtual_scan AS 'Virtual?',
-    s.is_auto_scan AS 'Auto?',
-    u.name AS 'User'
+    s.is_virtual_scan AS isVirtual,
+    s.is_auto_scan AS isAuto,
+    u.name AS userName
 FROM
-    report_dev.st_ivt_scan_record AS s
+    st_ivt_scan_record AS s
         INNER JOIN
     (SELECT 
         bar_code_id, MAX(scan_timestamp) AS mostRecent
     FROM
-        report_dev.st_ivt_scan_record
+        st_ivt_scan_record
     WHERE
         is_reversed = 0
     GROUP BY bar_code_id) AS lastSeen ON s.bar_code_id = lastSeen.bar_code_id
         AND s.scan_timestamp = lastSeen.mostRecent
         JOIN
-    report_dev.rh_userprofile AS u ON u.userprofileid = s.user_id
+    rh_userprofile AS u ON u.userprofileid = s.user_id
         JOIN
-    report_dev.st_biz_managed_resource AS m ON m.id = s.serial_number_id
+    st_biz_managed_resource AS m ON m.id = s.serial_number_id
         JOIN
     st_ivt_inventory_item AS i ON i.id = s.item_id
         JOIN
     st_ivt_inventory_group AS g ON g.id = i.group_id
         LEFT JOIN
-    report_dev.st_prj_project_element_line_item AS li ON li.id = s.line_item_id
+    st_prj_project_element_line_item AS li ON li.id = s.line_item_id
         LEFT JOIN
-    report_dev.st_prj_project_element AS p ON p.id = li.project_element_id
+    st_prj_project_element AS p ON p.id = li.project_element_id
+        LEFT JOIN st_prj_project_element AS p2 ON p2.id = p.parent_id
         JOIN st_ivt_serial_number AS sn ON sn.id = s.serial_number_id
 WHERE
     s.serial_number_id IN (SELECT 
             m.id
         FROM
-            report_dev.st_biz_managed_resource AS m
+            st_biz_managed_resource AS m
                 JOIN
             st_ivt_serial_number AS s ON s.id = m.id
                 JOIN
@@ -58,25 +62,33 @@ WHERE
 			AND g.full_display_string NOT LIKE '%Test%'
 			AND s.is_sold=0
 			AND s.is_decommissioned = 0)
-ORDER BY p.planned_end_date DESC]]>
+ORDER BY p.planned_end_date DESC, itemName ASC]]>
 	</queryString>
-	<field name="Last Record" class="java.sql.Timestamp">
-		<property name="com.jaspersoft.studio.field.label" value="Last Record"/>
+	<field name="lastRecord" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="lastRecord"/>
 	</field>
-	<field name="Show Name" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="Show Name"/>
+	<field name="showName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="showName"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="st_prj_project_element"/>
 	</field>
-	<field name="Group" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="Group"/>
+	<field name="woNumber" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="woNumber"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="st_prj_project_element"/>
+	</field>
+	<field name="id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="st_prj_project_element"/>
+	</field>
+	<field name="groupString" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="groupString"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="st_ivt_inventory_group"/>
 	</field>
 	<field name="planned_end_date" class="java.sql.Timestamp">
 		<property name="com.jaspersoft.studio.field.label" value="planned_end_date"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="st_prj_project_element"/>
 	</field>
-	<field name="Item Name" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="Item Name"/>
+	<field name="itemName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="itemName"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="st_biz_managed_resource"/>
 	</field>
 	<field name="bar_code_id" class="java.lang.String">
@@ -95,40 +107,45 @@ ORDER BY p.planned_end_date DESC]]>
 		<property name="com.jaspersoft.studio.field.label" value="scan_mode"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="st_ivt_scan_record"/>
 	</field>
-	<field name="Virtual?" class="java.lang.Boolean">
-		<property name="com.jaspersoft.studio.field.label" value="Virtual?"/>
+	<field name="isVirtual" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.label" value="isVirtual"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="st_ivt_scan_record"/>
 	</field>
-	<field name="Auto?" class="java.lang.Boolean">
-		<property name="com.jaspersoft.studio.field.label" value="Auto?"/>
+	<field name="isAuto" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.label" value="isAuto"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="st_ivt_scan_record"/>
 	</field>
-	<field name="User" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="User"/>
+	<field name="userName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="userName"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="rh_userprofile"/>
 	</field>
+	<variable name="gSum" class="java.lang.Float" resetType="Group" resetGroup="byItem" calculation="Sum">
+		<variableExpression><![CDATA[$F{replacement_cost}]]></variableExpression>
+	</variable>
 	<group name="byItem" keepTogether="true">
-		<groupExpression><![CDATA[$F{Show Name}]]></groupExpression>
+		<groupExpression><![CDATA[$F{showName}]]></groupExpression>
 		<groupHeader>
-			<band height="33">
-				<textField>
-					<reportElement mode="Opaque" x="0" y="16" width="341" height="17" backcolor="#DBDBDB" uuid="fece5f18-9577-4f38-91e3-559073ccd38b">
+			<band height="32">
+				<textField hyperlinkType="Reference">
+					<reportElement mode="Opaque" x="0" y="0" width="341" height="17" backcolor="#DBDBDB" uuid="fece5f18-9577-4f38-91e3-559073ccd38b">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b276837f-624f-48c2-a6eb-2a5c6e82d2a2"/>
 					</reportElement>
 					<box topPadding="1" leftPadding="3" bottomPadding="1" rightPadding="1">
-						<topPen lineWidth="1.0"/>
+						<topPen lineWidth="1.75"/>
 						<leftPen lineWidth="1.0"/>
 						<bottomPen lineWidth="1.0"/>
 					</box>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="Calibri" size="12" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{Show Name}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{showName} + " (" + $F{woNumber} + ")"]]></textFieldExpression>
+					<hyperlinkReferenceExpression><![CDATA["https://stagehouse.flexrentalsolutions.com/ui/goto/" + $F{id}]]></hyperlinkReferenceExpression>
+					<hyperlinkTooltipExpression><![CDATA["Open this element in Flex"]]></hyperlinkTooltipExpression>
 				</textField>
 				<textField pattern="MMMM d, yyyy">
-					<reportElement mode="Opaque" x="454" y="16" width="117" height="17" backcolor="#DBDBDB" uuid="dceaa0b9-2f4b-461b-a2eb-d789ba814b91"/>
+					<reportElement mode="Opaque" x="454" y="0" width="117" height="17" backcolor="#DBDBDB" uuid="dceaa0b9-2f4b-461b-a2eb-d789ba814b91"/>
 					<box topPadding="1" leftPadding="3" bottomPadding="0" rightPadding="1">
-						<topPen lineWidth="1.0"/>
+						<topPen lineWidth="1.75"/>
 						<leftPen lineWidth="0.0"/>
 						<bottomPen lineWidth="1.0"/>
 						<rightPen lineWidth="1.0"/>
@@ -139,9 +156,9 @@ ORDER BY p.planned_end_date DESC]]>
 					<textFieldExpression><![CDATA[$F{planned_end_date}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement mode="Opaque" x="341" y="16" width="115" height="17" backcolor="#DBDBDB" uuid="d446d5e9-6ca4-48dc-adcc-48cbf341217e"/>
+					<reportElement mode="Opaque" x="341" y="0" width="115" height="17" backcolor="#DBDBDB" uuid="d446d5e9-6ca4-48dc-adcc-48cbf341217e"/>
 					<box topPadding="1" leftPadding="4" bottomPadding="1" rightPadding="1">
-						<topPen lineWidth="1.0"/>
+						<topPen lineWidth="1.75"/>
 						<leftPen lineWidth="1.0"/>
 						<bottomPen lineWidth="1.0"/>
 						<rightPen lineWidth="0.0"/>
@@ -152,9 +169,9 @@ ORDER BY p.planned_end_date DESC]]>
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="22">
+			<band height="36">
 				<staticText>
-					<reportElement x="410" y="0" width="115" height="22" uuid="e93066d0-dd74-4357-a064-33398e012509"/>
+					<reportElement x="400" y="-16" width="110" height="22" uuid="e93066d0-dd74-4357-a064-33398e012509"/>
 					<box topPadding="1" leftPadding="4" bottomPadding="1" rightPadding="1">
 						<topPen lineWidth="1.0"/>
 						<leftPen lineWidth="1.0"/>
@@ -165,17 +182,17 @@ ORDER BY p.planned_end_date DESC]]>
 					</textElement>
 					<text><![CDATA[Total Replacement Cost:]]></text>
 				</staticText>
-				<textField pattern="¤#,##0.00;¤-#,##0.00">
-					<reportElement x="520" y="0" width="51" height="22" uuid="ec451e90-b2c5-4506-88a2-c20294214080"/>
-					<box bottomPadding="1" rightPadding="3">
-						<topPen lineWidth="1.0"/>
+				<textField evaluationTime="Group" evaluationGroup="byItem" pattern="¤#,##0.00;¤-#,##0.00">
+					<reportElement x="510" y="-16" width="61" height="22" uuid="f406acf4-99c4-4d8e-ac02-8e97d8766707"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
 						<bottomPen lineWidth="1.0"/>
 						<rightPen lineWidth="1.0"/>
 					</box>
-					<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
 						<font fontName="Calibri" size="12" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{replacement_cost} * $V{byItem_COUNT}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{gSum}]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
@@ -209,20 +226,55 @@ http://www.stagehouselv.com]]></text>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="23" splitType="Stretch">
+		<band height="61" splitType="Stretch">
 			<staticText>
-				<reportElement x="1" y="0" width="287" height="23" uuid="31eee29b-28ad-4783-a637-a52d0b544dc0"/>
+				<reportElement x="1" y="0" width="287" height="22" uuid="31eee29b-28ad-4783-a637-a52d0b544dc0"/>
 				<textElement>
-					<font size="18"/>
+					<font fontName="Calibri" size="18"/>
 				</textElement>
 				<text><![CDATA[Presumed Missing - By Job]]></text>
+			</staticText>
+			<textField pattern="MMM d, yyyy">
+				<reportElement x="0" y="22" width="174" height="17" uuid="8a273a11-1ac4-4cb2-b140-18379b4caf01"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="46" width="50" height="15" uuid="49f58ba9-4ed1-47db-aa4d-90d06948d9be"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bar Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="46" width="35" height="15" uuid="afcc153e-2820-4435-bffb-41b97d08817c"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Stencil]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="46" width="256" height="15" uuid="720d749d-375b-4c10-bc0c-e621a5affe9f"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Item Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="341" y="46" width="230" height="15" uuid="374f3e58-59bf-41d1-9110-00d53928f8a0"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Last Seen]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="15" splitType="Stretch">
+		<band height="16" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="55" height="15" uuid="0fe2c7ff-b448-4031-abef-c14aea9bfdb1">
+				<reportElement x="0" y="-15" width="50" height="15" uuid="0fe2c7ff-b448-4031-abef-c14aea9bfdb1">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cf561f09-e1be-4558-8bd3-3d711048ca11"/>
 				</reportElement>
 				<box topPadding="1" leftPadding="4" bottomPadding="1" rightPadding="1">
@@ -237,7 +289,7 @@ http://www.stagehouselv.com]]></text>
 				<textFieldExpression><![CDATA[$F{bar_code_id}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="55" y="0" width="30" height="15" uuid="ad4081cd-3134-47af-96c9-202d0d056c26">
+				<reportElement x="50" y="-15" width="35" height="15" uuid="ad4081cd-3134-47af-96c9-202d0d056c26">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1b2b10dc-f468-4075-bbd6-df642f8f2bdb"/>
 				</reportElement>
 				<box topPadding="1" leftPadding="4" bottomPadding="1" rightPadding="1">
@@ -252,7 +304,7 @@ http://www.stagehouselv.com]]></text>
 				<textFieldExpression><![CDATA[$F{stencil}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="85" y="0" width="256" height="15" uuid="b609e1d2-7aac-43d3-b636-8837749c35a3">
+				<reportElement x="85" y="-15" width="256" height="15" uuid="b609e1d2-7aac-43d3-b636-8837749c35a3">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c2c68cb0-3ac4-4b9c-9d5c-9c5a27002282"/>
 				</reportElement>
 				<box topPadding="1" leftPadding="4" bottomPadding="1" rightPadding="1">
@@ -264,10 +316,10 @@ http://www.stagehouselv.com]]></text>
 				<textElement>
 					<font fontName="Calibri"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{Item Name}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{itemName}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="341" y="0" width="79" height="15" uuid="ca3c3544-aeaa-483e-bb16-4beabb86ef27">
+				<reportElement x="341" y="-15" width="79" height="15" uuid="ca3c3544-aeaa-483e-bb16-4beabb86ef27">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c2c68cb0-3ac4-4b9c-9d5c-9c5a27002282"/>
 				</reportElement>
 				<box topPadding="1" leftPadding="4" bottomPadding="1" rightPadding="1">
@@ -281,8 +333,8 @@ http://www.stagehouselv.com]]></text>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{scan_mode} + " scan: "]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="420" y="0" width="151" height="15" uuid="f48ef11b-94dc-461d-8521-896bbf6c83ff">
+			<textField pattern="M/d/yy h:mm a">
+				<reportElement x="420" y="-15" width="151" height="15" uuid="f48ef11b-94dc-461d-8521-896bbf6c83ff">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c2c68cb0-3ac4-4b9c-9d5c-9c5a27002282"/>
 				</reportElement>
 				<box topPadding="1" leftPadding="4" bottomPadding="1" rightPadding="1">
@@ -294,12 +346,19 @@ http://www.stagehouselv.com]]></text>
 				<textElement verticalAlignment="Bottom">
 					<font fontName="Calibri"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{Last Record}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{lastRecord}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement x="241" y="-15" width="100" height="15" uuid="525363bf-c27f-43f8-be06-b5193aa2e377"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{replacement_cost}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="12" splitType="Stretch">
+		<band height="59" splitType="Stretch">
 			<textField>
 				<reportElement x="2" y="0" width="70" height="10" uuid="191f4157-e2ae-4843-8ffc-8c69d71770fd"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
@@ -330,4 +389,15 @@ http://www.stagehouselv.com]]></text>
 			</textField>
 		</band>
 	</pageFooter>
+	<summary>
+		<band height="18">
+			<textField>
+				<reportElement x="0" y="2" width="100" height="14" uuid="c19e01b6-8a23-440b-ba3a-375f7283d01a"/>
+				<textElement>
+					<font fontName="Calibri" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
 </jasperReport>
