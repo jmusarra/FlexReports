@@ -140,7 +140,7 @@ ORDER BY p.planned_end_date DESC, itemName ASC]]>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{showName} + " (" + $F{woNumber} + ")"]]></textFieldExpression>
 					<hyperlinkReferenceExpression><![CDATA["https://stagehouse.flexrentalsolutions.com/ui/goto/" + $F{id}]]></hyperlinkReferenceExpression>
-					<hyperlinkTooltipExpression><![CDATA["Open this element in Flex"]]></hyperlinkTooltipExpression>
+					<hyperlinkTooltipExpression><![CDATA["Open this manifest in Flex"]]></hyperlinkTooltipExpression>
 				</textField>
 				<textField pattern="MMMM d, yyyy">
 					<reportElement mode="Opaque" x="454" y="0" width="117" height="17" backcolor="#DBDBDB" uuid="dceaa0b9-2f4b-461b-a2eb-d789ba814b91"/>
@@ -269,6 +269,13 @@ http://www.stagehouselv.com]]></text>
 				</textElement>
 				<text><![CDATA[Last Seen]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="370" y="16" width="184" height="14" uuid="8b4ae3fb-ae8e-444d-bc83-3ad761418aa7"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Click Job Name / Manifest # to open in Flex]]></text>
+			</staticText>
 		</band>
 	</pageHeader>
 	<detail>
@@ -350,6 +357,7 @@ http://www.stagehouselv.com]]></text>
 			</textField>
 			<textField pattern="¤#,##0.00;¤-#,##0.00">
 				<reportElement x="241" y="-15" width="100" height="15" uuid="525363bf-c27f-43f8-be06-b5193aa2e377"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1" rightPadding="4"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Calibri"/>
 				</textElement>
