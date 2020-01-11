@@ -4,7 +4,7 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="manifest"/>
 	<parameter name="PROJECT_ELEMENT_ID" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
@@ -115,6 +115,26 @@
 	</background>
 	<title>
 		<band height="275" splitType="Stretch">
+			<staticText>
+				<reportElement x="393" y="170" width="179" height="20" uuid="1e27635a-7e45-4004-b459-178c07b178ba"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="393" y="150" width="179" height="20" uuid="fba4579c-96f2-4c94-a893-4bf0de7f149d"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
 			<staticText>
 				<reportElement x="167" y="80" width="255" height="28" forecolor="#666666" uuid="57dcd354-c9a6-4daa-bc9f-1aa61b2b0629"/>
 				<box leftPadding="0"/>
@@ -409,7 +429,7 @@
 				<textFieldExpression><![CDATA[$F{leftAddressBlock}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="393" y="115" width="89" height="15" uuid="0f75e9e9-c04a-4e55-bbc0-0ec1fb2ea4a9">
+				<reportElement x="393" y="115" width="90" height="15" uuid="0f75e9e9-c04a-4e55-bbc0-0ec1fb2ea4a9">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
@@ -450,7 +470,7 @@
 				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="393" y="134" width="179" height="16" uuid="6aaacb59-571e-4730-8578-3444bfef0392"/>
+				<reportElement x="393" y="130" width="179" height="20" uuid="6aaacb59-571e-4730-8578-3444bfef0392"/>
 				<box>
 					<bottomPen lineWidth="1.0"/>
 				</box>
@@ -460,43 +480,25 @@
 				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="449" y="159" width="67" height="19" uuid="05ed6337-f3be-4eb3-89fb-090112aaddda"/>
-				<textElement textAlignment="Center"/>
+				<reportElement x="449" y="156" width="67" height="14" uuid="05ed6337-f3be-4eb3-89fb-090112aaddda"/>
+				<box bottomPadding="0"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
 				<text><![CDATA[Date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="459" y="177" width="46" height="15" uuid="447bd784-1709-4d41-a2ca-2a86d4fac3b5"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement x="459" y="175" width="46" height="15" uuid="447bd784-1709-4d41-a2ca-2a86d4fac3b5"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
 				<text><![CDATA[Time In]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="453" y="198" width="56" height="14" uuid="50b7e44a-2829-4da1-abe0-f022a2580809"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement x="453" y="196" width="56" height="14" uuid="50b7e44a-2829-4da1-abe0-f022a2580809"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
 				<text><![CDATA[Time Out]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="393" y="154" width="179" height="16" uuid="fba4579c-96f2-4c94-a893-4bf0de7f149d"/>
-				<box>
-					<bottomPen lineWidth="1.0"/>
-				</box>
-				<textElement verticalAlignment="Middle" markup="none">
-					<font size="8"/>
-				</textElement>
-				<text><![CDATA[]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="393" y="174" width="179" height="16" uuid="1e27635a-7e45-4004-b459-178c07b178ba"/>
-				<box>
-					<bottomPen lineWidth="1.0"/>
-				</box>
-				<textElement verticalAlignment="Middle" markup="none">
-					<font size="8"/>
-				</textElement>
-				<text><![CDATA[]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="452" y="139" width="60" height="14" uuid="354294cd-3882-47f1-83a0-46ed13f34800"/>
-				<textElement textAlignment="Center"/>
+				<reportElement x="452" y="136" width="60" height="14" uuid="354294cd-3882-47f1-83a0-46ed13f34800"/>
+				<box bottomPadding="0"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
 				<text><![CDATA[Truck]]></text>
 			</staticText>
 		</band>
@@ -543,7 +545,7 @@
 				<text><![CDATA[Barcode]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="0" width="39" height="16" forecolor="#000000" uuid="4b90bc66-5f4e-4ffd-b8cc-e6800862d7cd"/>
+				<reportElement mode="Opaque" x="0" y="0" width="40" height="16" forecolor="#000000" uuid="4b90bc66-5f4e-4ffd-b8cc-e6800862d7cd"/>
 				<box leftPadding="3" rightPadding="3">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -732,11 +734,11 @@
 				<text><![CDATA[TOTAL]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="174" y="35" width="95" height="16" isRemoveLineWhenBlank="true" uuid="cdeb11af-d699-4f62-8575-78a35f5bdb7f"/>
+				<reportElement mode="Opaque" x="167" y="35" width="102" height="16" isRemoveLineWhenBlank="true" uuid="cdeb11af-d699-4f62-8575-78a35f5bdb7f"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Shipper Signature]]></text>
+				<text><![CDATA[Stage House Signature]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="274" y="35" width="203" height="16" uuid="de95f013-c5be-469b-831a-3f64d29375fd"/>
@@ -769,11 +771,11 @@
 				<text><![CDATA[X]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="174" y="65" width="95" height="16" isRemoveLineWhenBlank="true" uuid="23382457-c242-4138-9650-d30a44a6e5bc"/>
+				<reportElement mode="Opaque" x="150" y="65" width="119" height="16" isRemoveLineWhenBlank="true" uuid="23382457-c242-4138-9650-d30a44a6e5bc"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Carrier Signature]]></text>
+				<text><![CDATA[Driver / Carrier Signature]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="477" y="65" width="95" height="16" uuid="34529486-0410-47b1-bc15-857c234648bd"/>
@@ -811,40 +813,6 @@
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Date]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="20" y="35" width="60" height="16" isRemoveLineWhenBlank="true" uuid="9c8dd81a-b25c-49aa-b1aa-c11ec698b375"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[SH Time Out:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="20" y="65" width="60" height="16" isRemoveLineWhenBlank="true" uuid="f3adb4ed-3f7c-4886-abe4-6e20dee8c69f"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[SH Time In:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="80" y="65" width="70" height="16" uuid="699e963f-bf07-4b4d-b45b-375e562ad9a0"/>
-				<box>
-					<bottomPen lineWidth="1.0"/>
-				</box>
-				<textElement verticalAlignment="Middle" markup="none">
-					<font size="8"/>
-				</textElement>
-				<text><![CDATA[]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="80" y="35" width="70" height="16" uuid="566c96b5-70a5-4798-9d7a-b8ab7438e6f3"/>
-				<box>
-					<bottomPen lineWidth="1.0"/>
-				</box>
-				<textElement verticalAlignment="Middle" markup="none">
-					<font size="8"/>
-				</textElement>
-				<text><![CDATA[]]></text>
 			</staticText>
 		</band>
 	</summary>

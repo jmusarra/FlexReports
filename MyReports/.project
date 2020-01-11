@@ -47,9 +47,39 @@
 			<location>/Users/jsm/Public/StageHouse/Flex/reports/WorkOrder_SH.jrxml</location>
 		</link>
 		<link>
+			<name>financials-quote-with-pricing-look-A.jrxml</name>
+			<type>1</type>
+			<location>/Users/jsm/Public/StageHouse/Flex/reports/embedded/financials-quote-with-pricing-look-A.jrxml</location>
+		</link>
+		<link>
+			<name>financials-quote-with-pricing-look-B.jrxml</name>
+			<type>1</type>
+			<location>/Users/jsm/Public/StageHouse/Flex/reports/embedded/financials-quote-with-pricing-look-B.jrxml</location>
+		</link>
+		<link>
+			<name>financials-quote-with-subtotals-look-A.jrxml</name>
+			<type>1</type>
+			<location>/Users/jsm/Public/StageHouse/Flex/reports/embedded/financials-quote-with-subtotals-look-A.jrxml</location>
+		</link>
+		<link>
+			<name>inventory-MaintenanceReport.jrxml</name>
+			<type>1</type>
+			<location>/Users/jsm/Public/StageHouse/Flex/reports/embedded/inventory-MaintenanceReport.jrxml</location>
+		</link>
+		<link>
+			<name>inventory-MaintenanceReport_1.jrxml</name>
+			<type>1</type>
+			<location>/Users/jsm/Public/StageHouse/Flex/reports/embedded/inventory-MaintenanceReport.jrxml</location>
+		</link>
+		<link>
 			<name>inventory-ShippingManifest-SH.jrxml</name>
 			<type>1</type>
 			<location>/Users/jsm/Public/StageHouse/Flex/reports/inventory-ShippingManifest-SH.jrxml</location>
+		</link>
+		<link>
+			<name>inventory-equipment-list-look-A.jrxml</name>
+			<type>1</type>
+			<location>/Users/jsm/Public/StageHouse/Flex/reports/embedded/inventory-equipment-list-look-A.jrxml</location>
 		</link>
 		<link>
 			<name>inventory-equipment-list-look-A_SH.jrxml</name>
